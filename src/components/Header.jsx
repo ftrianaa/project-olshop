@@ -22,9 +22,9 @@ export default function Header() {
         <Flex bgColor='gray.700'>
             <Heading>olimall</Heading>
             <Spacer />
-            <Button>Home</Button>
-            <Button>Cart</Button>
-            <Button onClick={() => handleLogout()}>LogOut</Button>
+            <Button bgColor="transparent">Home</Button>
+            <Button bgColor='transparent'>Cart</Button>
+            <Button bgColor='transparent' onClick={() => handleLogout()}>LogOut</Button>
             {/* <ColorModeSwitcher /> */}
         </Flex>
     )
