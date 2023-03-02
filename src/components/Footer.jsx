@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Flex, FormControl, FormHelperText, Grid, GridItem, Heading, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react";
 
 import { FaEnvelope, FaFacebookF, FaInstagram, FaLinkedin, FaPhone, FaPinterest, FaTwitter, FaYoutube } from 'react-icons/fa';
-import { FiFacebook } from 'react-icons/fi'
+
 export default function Footer() {
     return (
         <>
