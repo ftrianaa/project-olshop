@@ -10,7 +10,7 @@ export const AuthReducer = (initialState, action) => {
         case "SUCCESS_LOGIN":
             return {
                 ...initialState,
-                user: action.user,
+                user: action,
                 isLogin: true
             }
         case "LOGOUT":
