@@ -1,8 +1,9 @@
-import { Button, Flex, Heading, Spacer } from "@chakra-ui/react";
+import { Button, Flex, Heading, Spacer, Box, InputGroup, Input, InputRightElement } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { LogoutUser } from "../actions/Actions";
 import { useNavigate } from "react-router-dom";
 import { useAuthDispatch, useAuthState } from "../actions/Context";
+import { FaSearch } from "react-icons/fa";
 // import { ColorModeSwitcher } from '../ColorModeSwitcher'
 export default function Header() {
     const navigate = useNavigate()
@@ -14,19 +15,37 @@ export default function Header() {
         LogoutUser(dispatch)
     }
     useEffect(() => {
-        if(isLogin === false) {
+        if (isLogin === false ) {
             return navigate('/')
         }
     }, [isLogin])
     return (
-        <Flex bgColor='gray.700'>
-            <Heading>olimall</Heading>
-            <Spacer />
-            <Button bgColor="transparent">Home</Button>
-            <Button bgColor='transparent'>Cart</Button>
-            <Button bgColor='transparent' onClick={() => handleLogout()}>LogOut</Button>
-            {/* <ColorModeSwitcher /> */}
-        </Flex>
+        <Box position='sticky' top='0'zIndex={555}>
+            <Flex bgColor='gray.700' p={5}>
+                <Heading textTransform='uppercase' letterSpacing={8}>olimall</Heading>
+                <Spacer />
+                <Button bgColor="transparent" onClick={()=>navigate('/women')}>Women</Button>
+                <Button bgColor="transparent" onClick={()=>navigate('/men')}>Men</Button>
+                <Button bgColor="transparent" onClick={()=>navigate('/jewelery')}>Jewelery</Button>
+                <Button bgColor="transparent" onClick={()=>navigate('/electronic')}>Electronics</Button>
+                <Spacer />
+                <Spacer />
+                <InputGroup w='md'>
+                    <Input placeholder="Search..." />
+                    <InputRightElement w='48px' >
+                        <Button >
+                            <FaSearch/>
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
+                <Spacer />
+                <Button bgColor="transparent" onClick={()=>navigate('/dashboard')}>Home</Button>
+                <Button bgColor='transparent'>Cart</Button>
+                <Button bgColor='transparent' onClick={() => handleLogout()}>LogOut</Button>
+                {/* <ColorModeSwitcher /> */}
+            </Flex>
+        </Box>
+
     )
 
 }
