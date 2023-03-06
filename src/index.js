@@ -1,7 +1,7 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { AuthProvider } from './actions/Context';
+import { AuthCartProvider, AuthProvider } from './actions/Context';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
@@ -13,8 +13,10 @@ root.render(
   <BrowserRouter>
     <StrictMode>
       <AuthProvider>
-        <ColorModeScript />
-        <App />
+        <AuthCartProvider>
+          <ColorModeScript />
+          <App />
+        </AuthCartProvider>
       </AuthProvider>
     </StrictMode>
   </BrowserRouter>

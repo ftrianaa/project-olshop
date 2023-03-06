@@ -19,7 +19,6 @@ export default function Routers() {
             <Route path="/electronic" element={<Electronic/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/modal" element={<DescriptionModal/>}/>
-
         </Routes>
     )
 }

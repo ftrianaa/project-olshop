@@ -1,3 +1,6 @@
+import { useState } from "react"
+import { useCartState } from "./Context"
+
 export const LoginUser = (dispatch, payloadLogin) => {
     const userData = {
         email: payloadLogin.email
@@ -19,10 +22,21 @@ export const LoginUser = (dispatch, payloadLogin) => {
 }
 //^ itu di atas semua action, isinya type dan payload
 export const LogoutUser = (dispatch) => {
-    const status = 'Anda berhasil logout'
     dispatch({
-        type: 'LOGOUT',
-
+        type: 'LOGOUT'
     })
-    localStorage.setItem('user', JSON.stringify(status))
+    localStorage.setItem('user', JSON.stringify(''))
+
+}
+
+export const AddCart = (dispatch, payloproductdCart) => {
+    console.log("ini Add Cart ACtion");
+    dispatch({
+        type: 'ADD_CART',
+        cart: payloproductdCart
+    })
+    localStorage.setItem('cart', JSON.stringify(payloproductdCart))
+
+    console.log(payloproductdCart, "ini setelah set");
+    return payloproductdCart
 }

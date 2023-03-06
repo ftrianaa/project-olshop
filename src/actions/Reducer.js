@@ -1,8 +1,11 @@
 let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : ''
+let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : ""
 
 export const initialState = {
     user: '' || user,
-    isLogin: false
+    isLogin: false,
+    cart: "" || cart
+
 }
 
 export const AuthReducer = (initialState, action) => {
@@ -15,13 +18,20 @@ export const AuthReducer = (initialState, action) => {
             }
         case "LOGOUT":
             return {
+                user:'',
+                isLogin:false,
+                cart:''
+            }
+        case "ADD_CART":
+            return{
                 ...initialState,
-                user:action,
-                isLogin: false
+                cart: action,
             }
         default:
             return {
-                ...initialState
+                user:'',
+                isLogin:false,
+                cart:''
             }
     }
 }

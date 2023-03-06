@@ -7,33 +7,31 @@ import { useAuthDispatch, useAuthState } from "../actions/Context";
 export default function Login() {
     const navigate = useNavigate()
     const dispatch = useAuthDispatch()
+    const { user } = useAuthState()
+
     // console.log(isLogin, 'ini context')
-    const [user, setUser] = useState({
+    const [users, setUsers] = useState({
         email: ''
     })
-    // console.log(user, 'ini user')
     const handleLogin = () => {
-        // console.log(user, 'ini user')
-        LoginUser(dispatch, user)
+        LoginUser(dispatch, users)
     }
-    const { isLogin } = useAuthState()
-    // console.log(isLogin)
     useEffect(() => {
-        if (isLogin === true) {
+        if (user !== '') {
             return navigate('/dashboard')
         }
-    }, [isLogin])
+    }, [user])
     return (
         <Flex justify='center'>
         <Box p={20} w='100vh'>
             <Heading textTransform='uppercase' letterSpacing={10} pb={10}>Olimall</Heading>
             <FormControl>
                 <FormLabel>Email</FormLabel>
-                <Input type='text' onChange={(e) => setUser({ ...user, email: e.target.value })} />
+                <Input type='text' onChange={(e) => setUsers({ ...users, email: e.target.value })} />
             </FormControl>
             <FormControl>
                 <FormLabel>Password</FormLabel>
-                <Input type='password' onChange={(e) => setUser({ ...user, password: e.target.value })} />
+                <Input type='password' onChange={(e) => setUsers({ ...users, password: e.target.value })} />
             </FormControl>
             <FormControl pt={5}>
                 <Button onClick={() => handleLogin()} >Login</Button>

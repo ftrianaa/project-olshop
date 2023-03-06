@@ -6,20 +6,39 @@ import Api from "../config/Config";
 import { FaStar } from "react-icons/fa";
 import { IoMdPerson } from 'react-icons/io'
 import DescriptionModal from "../components/DescriptionModal";
+import { AddCart } from "../actions/Actions";
+import { useCartDispatch, useCartState } from "../actions/Context";
 
 export default function Dashboard() {
+    const dispatch = useCartDispatch()
     const [products, setProducts] = useState([])
     const [item, setItem] = useState([])
+
+    const {cart} = useCartState();
+
+    // const [cart, setCart] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
+
     const getProduct = async () => {
         const res = await Api.get('/products')
         setProducts(res.data)
     }
+
     const handleModalDesc = (product) => {
         onOpen()
         setItem(product)
-        console.log(item, 'ini item db')
+        // console.log(item, 'ini item db')
     }
+
+    const handleCart = async (product) => {
+        // console.log("ini handle cart", cart.cart, product);
+        // let newArr = [];
+        // console.log(newArr, "newArr")
+        // console.log(cart, "cart")
+
+        await AddCart(dispatch, [...cart.cart, product]);
+    }
+
     useEffect(() => {
         getProduct()
     }, [])
@@ -37,15 +56,12 @@ export default function Dashboard() {
                                 <Text>${product.price}</Text>
                             </CardBody>
                             <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
-
                             <CardFooter>
                                 <Button onClick={() => handleModalDesc(product)}>Description</Button>
                                 <Spacer />
-                                <Button>Add to Cart</Button>
+                                <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                             </CardFooter>
-
                         </Card>
-
                     ))}
                 </Wrap>
             </Box>

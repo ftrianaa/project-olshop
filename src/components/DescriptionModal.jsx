@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Image, Modal, ModalBody, ModalCloseButton, 
 
 export default function DescriptionModal(props) {
     const { isOpen, onClose, item } = props
-    console.log(item, 'ini item modal')
+    // console.log(item, 'ini item modal')
     return (
         <>
             {/* <Button onClick={onOpen}>Trigger modal</Button> */}
