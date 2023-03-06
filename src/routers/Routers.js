@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import DescriptionModal from "../components/DescriptionModal";
 import Dashboard from "../pages/Dashboard";
 import Electronic from "../pages/ElectronicPage";
 import Jewelery from "../pages/JeweleryPage";
@@ -17,6 +18,7 @@ export default function Routers() {
             <Route path="/jewelery" element={<Jewelery/>}/>
             <Route path="/electronic" element={<Electronic/>}/>
             <Route path="/signup" element={<Signup/>}/>
+            <Route path="/modal" element={<DescriptionModal/>}/>
 
         </Routes>
     )

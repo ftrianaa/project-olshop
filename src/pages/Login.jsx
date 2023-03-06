@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormLabel, Heading, Input } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Heading, Input, Text, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginUser } from "../actions/Actions";
@@ -9,8 +9,7 @@ export default function Login() {
     const dispatch = useAuthDispatch()
     // console.log(isLogin, 'ini context')
     const [user, setUser] = useState({
-        email: '',
-        isLogin: false
+        email: ''
     })
     // console.log(user, 'ini user')
     const handleLogin = () => {
@@ -25,7 +24,8 @@ export default function Login() {
         }
     }, [isLogin])
     return (
-        <Box p={20}>
+        <Flex justify='center'>
+        <Box p={20} w='100vh'>
             <Heading textTransform='uppercase' letterSpacing={10} pb={10}>Olimall</Heading>
             <FormControl>
                 <FormLabel>Email</FormLabel>
@@ -38,6 +38,8 @@ export default function Login() {
             <FormControl pt={5}>
                 <Button onClick={() => handleLogin()} >Login</Button>
             </FormControl>
+            <Text p={5} textTransform="uppercase" fontSize='16px' letterSpacing={2}>don't have an account?<Text fontWeight='bold' cursor='pointer' onClick={()=>navigate('/signup')}>register here</Text></Text>
         </Box>
+        </Flex>
     )
 }
