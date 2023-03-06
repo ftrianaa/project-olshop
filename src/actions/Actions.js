@@ -26,7 +26,7 @@ export const LogoutUser = (dispatch) => {
         type: 'LOGOUT'
     })
     localStorage.setItem('user', JSON.stringify(''))
-
+    localStorage.setItem('cart', JSON.stringify(''))
 }
 
 export const AddCart = (dispatch, payloproductdCart) => {

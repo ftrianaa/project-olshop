@@ -42,7 +42,7 @@ export default function Header() {
                 </InputGroup>
                 <Spacer />
                 <Button bgColor="transparent" onClick={() => navigate('/dashboard')}>Home</Button>
-                <Button bgColor='transparent'>Cart <Tag>{cart.length ===  0 ? 0 : cart.cart.length}</Tag></Button>
+                <Button bgColor='transparent'>Cart <Tag>{cart.length === 0 ? 0 : cart.cart.length}</Tag></Button>
                 <Button bgColor='transparent' onClick={() => handleLogout()}>LogOut</Button>
                 {/* <ColorModeSwitcher /> */}
             </Flex>

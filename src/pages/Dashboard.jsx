@@ -14,7 +14,7 @@ export default function Dashboard() {
     const [products, setProducts] = useState([])
     const [item, setItem] = useState([])
 
-    const {cart} = useCartState();
+    const { cart } = useCartState();
 
     // const [cart, setCart] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
@@ -35,8 +35,13 @@ export default function Dashboard() {
         // let newArr = [];
         // console.log(newArr, "newArr")
         // console.log(cart, "cart")
+        if (cart === '') {
+            await AddCart(dispatch, [...cart, product]);
+        }
+        else {
+            await AddCart(dispatch, [...cart.cart, product]);
 
-        await AddCart(dispatch, [...cart.cart, product]);
+        }
     }
 
     useEffect(() => {
