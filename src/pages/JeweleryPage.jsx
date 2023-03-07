@@ -6,7 +6,12 @@ import Header from "../components/Header";
 import Api from "../config/Config";
 import { FaStar } from "react-icons/fa";
 import { IoMdPerson } from 'react-icons/io'
+import { useCartDispatch, useCartState } from "../actions/Context";
+import { AddCart } from "../actions/Actions";
 export default function Jewelery() {
+    const dispatch = useCartDispatch()
+    const { cart } = useCartState();
+
     const [jeweleryProduct, setJeweleryProduct] = useState([])
     const [item, setItem] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
@@ -23,6 +28,15 @@ export default function Jewelery() {
         onOpen()
         setItem(product)
         console.log(item, 'ini item db')
+    }
+    const handleCart = async (product) => {
+        if (cart === '') {
+            await AddCart(dispatch, [...cart, product]);
+        }
+        else {
+            await AddCart(dispatch, [...cart.cart, product]);
+
+        }
     }
     useEffect(() => {
         getProduct()
@@ -45,7 +59,7 @@ export default function Jewelery() {
                         <CardFooter>
                             <Button onClick={() => handleModalDesc(product)}>Description</Button>
                             <Spacer />
-                            <Button>Add to Cart</Button>
+                            <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                         </CardFooter>
                     </Card>
                     ))}

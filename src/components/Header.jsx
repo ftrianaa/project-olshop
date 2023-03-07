@@ -21,6 +21,7 @@ export default function Header() {
             return navigate('/')
         }
     }, [user])
+    // console.log(cart, 'ini carttt')
     return (
         <Box position='sticky' top='0' zIndex={555}>
             <Flex bgColor='gray.700' p={5}>
@@ -42,7 +43,7 @@ export default function Header() {
                 </InputGroup>
                 <Spacer />
                 <Button bgColor="transparent" onClick={() => navigate('/dashboard')}>Home</Button>
-                <Button bgColor='transparent'>Cart <Tag>{cart.length === 0 ? 0 : cart.cart.length}</Tag></Button>
+                <Button bgColor='transparent'>Cart <Tag>{cart === '' ? 0 : cart.length || cart.cart.length}</Tag></Button>
                 <Button bgColor='transparent' onClick={() => handleLogout()}>LogOut</Button>
                 {/* <ColorModeSwitcher /> */}
             </Flex>

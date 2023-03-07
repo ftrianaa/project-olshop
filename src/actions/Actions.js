@@ -1,6 +1,3 @@
-import { useState } from "react"
-import { useCartState } from "./Context"
-
 export const LoginUser = (dispatch, payloadLogin) => {
     const userData = {
         email: payloadLogin.email

@@ -6,7 +6,12 @@ import Header from "../components/Header";
 import Api from "../config/Config";
 import { FaStar } from "react-icons/fa";
 import { IoMdPerson } from 'react-icons/io'
+import { AddCart } from "../actions/Actions";
+import { useCartDispatch, useCartState } from "../actions/Context";
 export default function Electronic() {
+    const dispatch = useCartDispatch()
+    const { cart } = useCartState();
+
     const [electronicProduct, setElectronicProduct] = useState([])
     const [item, setItem] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
@@ -23,6 +28,15 @@ export default function Electronic() {
         onOpen()
         setItem(product)
         console.log(item, 'ini item db')
+    }
+    const handleCart = async (product) => {
+        if (cart === '') {
+            await AddCart(dispatch, [...cart, product]);
+        }
+        else {
+            await AddCart(dispatch, [...cart.cart, product]);
+
+        }
     }
     useEffect(() => {
         getProduct()
@@ -45,7 +59,7 @@ export default function Electronic() {
                          <CardFooter>
                              <Button onClick={() => handleModalDesc(product)}>Description</Button>
                              <Spacer />
-                             <Button>Add to Cart</Button>
+                             <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                          </CardFooter>
                      </Card>
                     ))}

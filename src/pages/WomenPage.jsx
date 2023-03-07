@@ -3,12 +3,17 @@ import { Box, Button, Card, CardBody, CardFooter, Flex, Heading, Image, Spacer, 
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoMdPerson } from 'react-icons/io'
+import { AddCart } from "../actions/Actions";
+import { useCartDispatch, useCartState } from "../actions/Context";
 import DescriptionModal from "../components/DescriptionModal";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Api from "../config/Config";
 
 export default function Women() {
+    const dispatch = useCartDispatch()
+    const { cart } = useCartState();
+
     const [womenProduct, setWomenProduct] = useState([])
     const [item, setItem] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
@@ -25,6 +30,15 @@ export default function Women() {
         onOpen()
         setItem(product)
         // console.log(item, 'ini item db')
+    }
+    const handleCart = async (product) => {
+        if (cart === '') {
+            await AddCart(dispatch, [...cart, product]);
+        }
+        else {
+            await AddCart(dispatch, [...cart.cart, product]);
+
+        }
     }
     useEffect(() => {
         getProduct()
@@ -47,7 +61,7 @@ export default function Women() {
                         <CardFooter>
                             <Button onClick={() => handleModalDesc(product)}>Description</Button>
                             <Spacer />
-                            <Button>Add to Cart</Button>
+                            <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                         </CardFooter>
                     </Card>
                     ))}
