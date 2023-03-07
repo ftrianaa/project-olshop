@@ -1,4 +1,4 @@
-import { Box, Heading, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { useCartState } from "../actions/Context";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -6,7 +6,7 @@ import Header from "../components/Header";
 export default function CartPage() {
     const { cart } = useCartState()
 
-    console.log(cart.cart, 'ini cart di carpage')
+    console.log(cart, 'ini cart di carpage')
 
     let cartUser = cart.cart
     let total = 0
@@ -18,7 +18,7 @@ export default function CartPage() {
             </Heading>
             <Box p={10}>
                 <TableContainer>
-                    <Table variant='simple'  size='lg'>
+                    <Table variant='simple' size='lg'>
                         <Thead>
                             <Tr>
                                 <Th>Name</Th>
@@ -26,7 +26,7 @@ export default function CartPage() {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {cartUser !==undefined ? cartUser.map((product, index) => (
+                            {cartUser !== '' ? cartUser.map((product, index) => (
                                 <Tr>
                                     <Td>{product.title}</Td>
                                     <Td>{product.price}</Td>
@@ -34,9 +34,9 @@ export default function CartPage() {
                             )) : <></>}
                         </Tbody>
                         <Tfoot>
-                            { cartUser !== undefined ? cartUser.map((product) => {
+                            {cartUser !== '' ? cartUser.map((product) => {
                                 total += parseFloat(product.price)
-                            }) :<></> }
+                            }) : <></>}
                             <Tr>
                                 <Th>Total</Th>
                                 <Th>
@@ -46,8 +46,9 @@ export default function CartPage() {
                         </Tfoot>
                     </Table>
                 </TableContainer>
-
-
+                <Flex justify='right'>
+                    <Button>Checkout</Button>
+                </Flex>
             </Box>
             <Footer />
         </>

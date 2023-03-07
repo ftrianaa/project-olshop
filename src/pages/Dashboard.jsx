@@ -34,7 +34,7 @@ export default function Dashboard() {
         // console.log("ini handle cart", cart.cart, product);
         // let newArr = [];
         // console.log(newArr, "newArr")
-        // console.log(cart, "cart")
+        console.log(cart, "cart")
         if (cart === '') {
             await AddCart(dispatch, [...cart, product]);
         }
@@ -42,7 +42,7 @@ export default function Dashboard() {
             await AddCart(dispatch, [...cart.cart, product]);
 
         }
-    console.log(cart, 'ini carttt di db')
+    console.log(cart.cart, 'ini carttt di db')
 
     }
 
