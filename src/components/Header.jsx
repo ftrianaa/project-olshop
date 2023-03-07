@@ -36,14 +36,14 @@ export default function Header() {
                 <InputGroup w='md'>
                     <Input placeholder="Search..." />
                     <InputRightElement w='48px' >
-                        <Button >
+                        <Button onClick={() => navigate('/search')}>
                             <FaSearch />
                         </Button>
                     </InputRightElement>
                 </InputGroup>
                 <Spacer />
                 <Button bgColor="transparent" onClick={() => navigate('/dashboard')}>Home</Button>
-                <Button bgColor='transparent'>Cart <Tag>{cart === '' ? 0 : cart.length || cart.cart.length}</Tag></Button>
+                <Button bgColor='transparent' onClick={() => navigate('/cart')}>Cart <Tag>{cart === '' ? 0 : cart.length || cart.cart.length}</Tag></Button>
                 <Button bgColor='transparent' onClick={() => handleLogout()}>LogOut</Button>
                 {/* <ColorModeSwitcher /> */}
             </Flex>

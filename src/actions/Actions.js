@@ -27,13 +27,13 @@ export const LogoutUser = (dispatch) => {
 }
 
 export const AddCart = (dispatch, payloproductdCart) => {
-    console.log("ini Add Cart ACtion");
+    // console.log("ini Add Cart ACtion");
     dispatch({
         type: 'ADD_CART',
         cart: payloproductdCart
     })
     localStorage.setItem('cart', JSON.stringify(payloproductdCart))
 
-    console.log(payloproductdCart, "ini setelah set");
+    // console.log(payloproductdCart, "ini setelah set");
     return payloproductdCart
 }

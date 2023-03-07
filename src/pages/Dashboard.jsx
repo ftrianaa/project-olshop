@@ -42,6 +42,8 @@ export default function Dashboard() {
             await AddCart(dispatch, [...cart.cart, product]);
 
         }
+    console.log(cart, 'ini carttt di db')
+
     }
 
     useEffect(() => {
