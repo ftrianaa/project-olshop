@@ -29,20 +29,28 @@ export default function Dashboard() {
         setItem(product)
         // console.log(item, 'ini item db')
     }
-
+    let status = ''
+    if (cart !== '') {
+        status = 'ada'
+    }
+    if (cart.cart !== undefined) {
+        status = 'adaLagi'
+    }
     const handleCart = async (product) => {
         // console.log("ini handle cart", cart.cart, product);
         // let newArr = [];
         // console.log(newArr, "newArr")
         console.log(cart, "cart")
-        if (cart === '') {
+        console.log(status, 'statuzzzzz')
+
+        if (status === 'ada') {
             await AddCart(dispatch, [...cart, product]);
         }
-        else {
+        else if (status === 'adaLagi') {
             await AddCart(dispatch, [...cart.cart, product]);
 
-        }
-    console.log(cart.cart, 'ini carttt di db')
+        } else { await AddCart(dispatch, [...cart, product]); }
+        // console.log(cart.cart, 'ini carttt di db')
 
     }
 

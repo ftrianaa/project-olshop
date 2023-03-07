@@ -29,14 +29,21 @@ export default function Electronic() {
         setItem(product)
         console.log(item, 'ini item db')
     }
+    let status = ''
+    if (cart !== '') {
+        status = 'ada'
+    }
+    if (cart.cart !== undefined) {
+        status = 'adaLagi'
+    }
     const handleCart = async (product) => {
-        if (cart === '') {
+        if (status === 'ada') {
             await AddCart(dispatch, [...cart, product]);
         }
-        else {
+        else if (status === 'adaLagi') {
             await AddCart(dispatch, [...cart.cart, product]);
 
-        }
+        } else { await AddCart(dispatch, [...cart, product]); }
     }
     useEffect(() => {
         getProduct()

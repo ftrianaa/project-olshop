@@ -1,15 +1,39 @@
 import { Box, Button, Flex, Heading, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
-import { useCartState } from "../actions/Context";
+import { AddCart } from "../actions/Actions";
+import { useCartDispatch, useCartState } from "../actions/Context";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 export default function CartPage() {
     const { cart } = useCartState()
+    const dispatch = useCartDispatch()
 
-    console.log(cart, 'ini cart di carpage')
-
+    // console.log(cart, 'ini cart di carpage')
+    let status = ''
+    if (cart !== '') {
+        status = 'adaLagi'
+    }
+    if (cart.cart !== undefined) {
+        status = 'ada'
+    }
     let cartUser = cart.cart
     let total = 0
+
+    const deleteCart = (index) => {
+        if (status === 'adaLagi') {
+            cart.splice(index, 1)
+            AddCart(dispatch, cart)
+            // console.log('uwuuu')
+            // console.log(cart, 'cardel')
+
+        } else if (status === 'ada') {
+            // console.log('eyyooo')
+            cartUser.splice(index, 1)
+            AddCart(dispatch, cartUser)
+        }
+
+    }
+
     return (
         <>
             <Header />
@@ -23,18 +47,31 @@ export default function CartPage() {
                             <Tr>
                                 <Th>Name</Th>
                                 <Th>Price</Th>
+                                <Th>Action</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {cartUser !== '' ? cartUser.map((product, index) => (
-                                <Tr>
+
+                            {status === 'ada' ? cartUser.map((product, index) => (
+                                <Tr key={index}>
                                     <Td>{product.title}</Td>
                                     <Td>{product.price}</Td>
+                                    <Td><Button onClick={() => deleteCart(index)}>X</Button></Td>
+                                </Tr>
+                            )) : <></>}
+                            {status === 'adaLagi' ? cart.map((product, index) => (
+                                <Tr key={index}>
+                                    <Td>{product.title}</Td>
+                                    <Td>{product.price}</Td>
+                                    <Td><Button onClick={() => deleteCart(index)}>X</Button></Td>
                                 </Tr>
                             )) : <></>}
                         </Tbody>
                         <Tfoot>
-                            {cartUser !== '' ? cartUser.map((product) => {
+                            {status === 'ada' ? cartUser.map((product) => {
+                                total += parseFloat(product.price)
+                            }) : <></>}
+                            {status === 'adaLagi' ? cart.map((product) => {
                                 total += parseFloat(product.price)
                             }) : <></>}
                             <Tr>
