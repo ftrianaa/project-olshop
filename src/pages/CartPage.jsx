@@ -1,39 +1,40 @@
-import { Box, Button, Flex, Heading, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Heading, IconButton, Input, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { AddCart } from "../actions/Actions";
+import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import { useCartDispatch, useCartState } from "../actions/Context";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { useState } from "react";
 
 export default function CartPage() {
     const { cart } = useCartState()
     const dispatch = useCartDispatch()
+    const [qty, setQty] = useState(1)
+    console.log(cart, 'ini cart di carpage')
 
-    // console.log(cart, 'ini cart di carpage')
-    let status = ''
-    if (cart !== '') {
-        status = 'adaLagi'
-    }
-    if (cart.cart !== undefined) {
-        status = 'ada'
-    }
-    let cartUser = cart.cart
     let total = 0
 
     const deleteCart = (index) => {
-        if (status === 'adaLagi') {
-            cart.splice(index, 1)
-            AddCart(dispatch, cart)
-            // console.log('uwuuu')
-            // console.log(cart, 'cardel')
-
-        } else if (status === 'ada') {
-            // console.log('eyyooo')
-            cartUser.splice(index, 1)
-            AddCart(dispatch, cartUser)
-        }
-
+        cart.splice(index, 1)
+        AddCart(dispatch, cart)
     }
 
+    const handleQuantityPlus = (index) => {
+        const newQty = cart[index].quantity + 1
+        cart[index].quantity = newQty
+        setQty(cart[index].quantity)
+        // console.log(cart, 'pulu')
+    }
+
+    const handleQuantityMin = (index) => {
+        const newQty = cart[index].quantity - 1
+        cart[index].quantity = newQty
+        setQty(cart[index].quantity)
+        if(cart[index].quantity === 0){
+            cart.splice(index, 1)
+            AddCart(dispatch, cart)
+        }
+    }
     return (
         <>
             <Header />
@@ -47,33 +48,30 @@ export default function CartPage() {
                             <Tr>
                                 <Th>Name</Th>
                                 <Th>Price</Th>
+                                <Th>Quantity</Th>
                                 <Th>Action</Th>
                             </Tr>
                         </Thead>
                         <Tbody>
-
-                            {status === 'ada' ? cartUser.map((product, index) => (
-                                <Tr key={index}>
-                                    <Td>{product.title}</Td>
-                                    <Td>{product.price}</Td>
-                                    <Td><Button onClick={() => deleteCart(index)}>X</Button></Td>
-                                </Tr>
-                            )) : <></>}
-                            {status === 'adaLagi' ? cart.map((product, index) => (
-                                <Tr key={index}>
-                                    <Td>{product.title}</Td>
-                                    <Td>{product.price}</Td>
-                                    <Td><Button onClick={() => deleteCart(index)}>X</Button></Td>
-                                </Tr>
-                            )) : <></>}
+                            {cart ? cart.map((item, index) => {
+                                total += parseFloat(item.products.price) *  cart[index].quantity
+                                return (
+                                    <Tr key={index}>
+                                        <Td>{item.products.title}</Td>
+                                        <Td>{item.products.price}</Td>
+                                        <Td>
+                                            <ButtonGroup size='sm' isAttached variant='outline'>
+                                                <IconButton aria-label='Add to friends' icon={<MinusIcon />} onClick={() => handleQuantityMin(index)}/>
+                                                <Input type='number' size='sm' w={10} value={cart[index].quantity} />
+                                                <IconButton aria-label='Add to friends' icon={<AddIcon />} onClick={() => handleQuantityPlus(index)} />
+                                            </ButtonGroup>
+                                        </Td>
+                                        <Td><Button onClick={() => deleteCart(index)}>X</Button></Td>
+                                    </Tr>
+                                )
+                            }) : <></>}
                         </Tbody>
                         <Tfoot>
-                            {status === 'ada' ? cartUser.map((product) => {
-                                total += parseFloat(product.price)
-                            }) : <></>}
-                            {status === 'adaLagi' ? cart.map((product) => {
-                                total += parseFloat(product.price)
-                            }) : <></>}
                             <Tr>
                                 <Th>Total</Th>
                                 <Th>

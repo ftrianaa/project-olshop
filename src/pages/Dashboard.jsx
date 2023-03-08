@@ -10,10 +10,11 @@ import { AddCart } from "../actions/Actions";
 import { useCartDispatch, useCartState } from "../actions/Context";
 
 export default function Dashboard() {
+
     const dispatch = useCartDispatch()
     const [products, setProducts] = useState([])
     const [item, setItem] = useState([])
-
+    const [quantity, setQuantity] = useState(1)
     const { cart } = useCartState();
 
     // const [cart, setCart] = useState([])
@@ -29,30 +30,29 @@ export default function Dashboard() {
         setItem(product)
         // console.log(item, 'ini item db')
     }
-    let status = ''
-    if (cart !== '') {
-        status = 'ada'
-    }
-    if (cart.cart !== undefined) {
-        status = 'adaLagi'
-    }
+    // console.log(cart, "cart di dashboard")
+
     const handleCart = async (product) => {
         // console.log("ini handle cart", cart.cart, product);
         // let newArr = [];
         // console.log(newArr, "newArr")
-        console.log(cart, "cart")
-        console.log(status, 'statuzzzzz')
-
-        if (status === 'ada') {
-            await AddCart(dispatch, [...cart, product]);
+        
+        let newArr = {
+            products: product,
+            quantity: quantity
         }
-        else if (status === 'adaLagi') {
-            await AddCart(dispatch, [...cart.cart, product]);
+        // let send = [arr]
+        // console.log(newArr, 'snenene')
+        // arr.push({ ...newArr })
 
-        } else { await AddCart(dispatch, [...cart, product]); }
+        // setQuantity([...quantity,...arr])
+        // let hasil = arr
+        // console.log(quantity, 'ini hasil')
+        await AddCart(dispatch, [...cart, newArr]);
+        
         // console.log(cart.cart, 'ini carttt di db')
-
     }
+    // console.log(cart, "cart setelah click dashboard")
 
     useEffect(() => {
         getProduct()

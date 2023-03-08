@@ -12,6 +12,7 @@ import { AddCart } from "../actions/Actions";
 export default function Men() {
     const dispatch = useCartDispatch()
     const { cart } = useCartState();
+    const [quantity, setQuantity] = useState(0)
 
     const [menProduct, setMenProduct] = useState([])
     const [item, setItem] = useState([])
@@ -31,20 +32,12 @@ export default function Men() {
         console.log(item, 'ini item db')
     }
     let status = ''
-    if (cart !== '') {
-        status = 'ada'
-    }
-    if (cart.cart !== undefined) {
-        status = 'adaLagi'
-    }
     const handleCart = async (product) => {
-        if (status === 'ada') {
-            await AddCart(dispatch, [...cart, product]);
+        let newArr = {
+            products: product,
+            quantity: quantity
         }
-        else if (status === 'adaLagi') {
-            await AddCart(dispatch, [...cart.cart, product]);
-
-        } else { await AddCart(dispatch, [...cart, product]); }
+        await AddCart(dispatch, [...cart, newArr]);
     }
     useEffect(() => {
         getProduct()
