@@ -2,7 +2,6 @@ import { Box, Flex, FormControl, FormHelperText, FormLabel, Heading, HStack, Rad
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import {useState} from 'react'
-import { useCartState } from "../actions/Context";
 import { useLocation } from "react-router-dom";
 export default function CheckoutPage() {
     const location = useLocation()  
