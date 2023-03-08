@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import DescriptionModal from "../components/DescriptionModal";
 import CartPage from "../pages/CartPage";
+import CheckoutPage from "../pages/CheckoutPage";
 import Dashboard from "../pages/Dashboard";
 import Electronic from "../pages/ElectronicPage";
 import Jewelery from "../pages/JeweleryPage";
@@ -23,6 +24,7 @@ export default function Routers() {
             <Route path="/modal" element={<DescriptionModal/>}/>
             <Route path="/cart" element={<CartPage/>}/>
             <Route path="/search" element={<SearchPage/>}/>
+            <Route path="/payment" element={<CheckoutPage/>}/>
         </Routes>
     )
 }

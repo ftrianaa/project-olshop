@@ -5,8 +5,11 @@ import { useCartDispatch, useCartState } from "../actions/Context";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import CheckoutPage from "./CheckoutPage";
 
 export default function CartPage() {
+    const navigate = useNavigate()
     const { cart } = useCartState()
     const dispatch = useCartDispatch()
     const [qty, setQty] = useState(1)
@@ -82,10 +85,11 @@ export default function CartPage() {
                     </Table>
                 </TableContainer>
                 <Flex justify='right'>
-                    <Button>Checkout</Button>
+                    <Button onClick={()=>navigate('/payment', {state:{total:total}})}>Checkout</Button>
                 </Flex>
             </Box>
             <Footer />
+
         </>
     )
 }
