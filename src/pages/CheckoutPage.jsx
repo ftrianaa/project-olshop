@@ -28,7 +28,7 @@ export default function CheckoutPage() {
                     <Box>
                         <FormControl>
                             <FormLabel>Choose your payment</FormLabel>
-                            <RadioGroup defaultValue='bca' onChange={(e)=>setBank(e)}>
+                            <RadioGroup onChange={(e)=>setBank(e)}>
                                 <HStack>
                                     <Radio value='bca'>bca</Radio>
                                     <Radio value='bri'>bri</Radio>
