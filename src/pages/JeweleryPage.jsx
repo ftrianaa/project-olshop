@@ -8,16 +8,18 @@ import { FaStar } from "react-icons/fa";
 import { IoMdPerson } from 'react-icons/io'
 import { useCartDispatch, useCartState } from "../actions/Context";
 import { AddCart } from "../actions/Actions";
+import { useNavigate } from "react-router-dom";
 export default function Jewelery() {
+    const navigate = useNavigate()
     const dispatch = useCartDispatch()
     const { cart } = useCartState();
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
     const [jeweleryProduct, setJeweleryProduct] = useState([])
     const [item, setItem] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
     const getProduct = async () => {
         try {
-            const res = await Api.get(`/products/category/jewelery`)
+            const res = await Api.get(`/products`)
             // console.log(res, 'ini response')
             setJeweleryProduct(res.data)
         } catch (error) {
@@ -46,7 +48,8 @@ export default function Jewelery() {
 
             <Box p={10}>
                 <Wrap justify='center' align='center' >
-                    {jeweleryProduct.map((product, index) => (
+                    {jeweleryProduct.filter((item) => (item.category ===
+                        "jewelery")).map((product, index) => (
                         <Card key={index}>
                         <CardBody>
                             <Image src={product.image} w={300} h={200} objectFit='contain' />
@@ -55,7 +58,7 @@ export default function Jewelery() {
                         </CardBody>
                         <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
                         <CardFooter>
-                            <Button onClick={() => handleModalDesc(product)}>Description</Button>
+                            <Button  onClick={() => navigate(`/product/${product.category}/${product.id}`,{state:{data:product}})}>Description</Button>
                             <Spacer />
                             <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                         </CardFooter>

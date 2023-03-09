@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CheckoutPage from "./CheckoutPage";
 
 export default function CartPage() {
     const navigate = useNavigate()
@@ -61,7 +60,7 @@ export default function CartPage() {
                                 return (
                                     <Tr key={index}>
                                         <Td>{item.products.title}</Td>
-                                        <Td>{item.products.price}</Td>
+                                        <Td>${item.products.price}</Td>
                                         <Td>
                                             <ButtonGroup size='sm' isAttached variant='outline'>
                                                 <IconButton aria-label='Add to friends' icon={<MinusIcon />} onClick={() => handleQuantityMin(index)}/>
@@ -78,7 +77,7 @@ export default function CartPage() {
                             <Tr>
                                 <Th>Total</Th>
                                 <Th>
-                                    {total.toFixed(2)}
+                                    ${total.toFixed(2)}
                                 </Th>
                             </Tr>
                         </Tfoot>

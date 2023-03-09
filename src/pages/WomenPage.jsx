@@ -3,6 +3,7 @@ import { Box, Button, Card, CardBody, CardFooter, Flex, Heading, Image, Spacer, 
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoMdPerson } from 'react-icons/io'
+import { useNavigate } from "react-router-dom";
 import { AddCart } from "../actions/Actions";
 import { useCartDispatch, useCartState } from "../actions/Context";
 import DescriptionModal from "../components/DescriptionModal";
@@ -11,16 +12,17 @@ import Header from "../components/Header";
 import Api from "../config/Config";
 
 export default function Women() {
+    const navigate = useNavigate()
     const dispatch = useCartDispatch()
     const { cart } = useCartState();
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
 
     const [womenProduct, setWomenProduct] = useState([])
     const [item, setItem] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
     const getProduct = async () => {
         try {
-            const res = await Api.get(`/products/category/women's%20clothing`)
+            const res = await Api.get(`/products`)
             // console.log(res, 'ini response')
             setWomenProduct(res.data)
         } catch (error) {
@@ -49,7 +51,8 @@ export default function Women() {
 
             <Box p={10}>
                 <Wrap justify='center' align='center' >
-                    {womenProduct.map((product, index) => (
+                    {womenProduct.filter((item) => (item.category ===
+                        "women's clothing")).map((product, index) => (
                         <Card key={index}>
                         <CardBody>
                             <Image src={product.image} w={300} h={200} objectFit='contain' />
@@ -58,7 +61,7 @@ export default function Women() {
                         </CardBody>
                         <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
                         <CardFooter>
-                            <Button onClick={() => handleModalDesc(product)}>Description</Button>
+                            <Button onClick={() => navigate(`/product/${product.category}/${product.id}`,{state:{data:product}})}>Description</Button>
                             <Spacer />
                             <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                         </CardFooter>

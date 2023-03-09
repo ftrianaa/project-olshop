@@ -3,6 +3,7 @@ import DescriptionModal from "../components/DescriptionModal";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import Dashboard from "../pages/Dashboard";
+import DescriptionPage from "../pages/DescriptionPage";
 import Electronic from "../pages/ElectronicPage";
 import Jewelery from "../pages/JeweleryPage";
 import Login from "../pages/Login";
@@ -16,15 +17,16 @@ export default function Routers() {
         <Routes>
             <Route exact path='/' element={<Login/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
-            <Route path="/women" element={<Women/>}/>
-            <Route path="/men" element={<Men/>}/>
+            <Route path="/women's clothing" element={<Women/>}/>
+            <Route path="/men's clothing" element={<Men/>}/>
             <Route path="/jewelery" element={<Jewelery/>}/>
-            <Route path="/electronic" element={<Electronic/>}/>
+            <Route path="/electronics" element={<Electronic/>}/>
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/modal" element={<DescriptionModal/>}/>
             <Route path="/cart" element={<CartPage/>}/>
             <Route path="/search" element={<SearchPage/>}/>
             <Route path="/payment" element={<CheckoutPage/>}/>
+            <Route path="/product/:category/:id" element={<DescriptionPage />} />
         </Routes>
     )
 }

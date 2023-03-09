@@ -9,17 +9,20 @@ import { FaStar } from "react-icons/fa";
 import { IoMdPerson } from 'react-icons/io'
 import { useCartDispatch, useCartState } from "../actions/Context";
 import { AddCart } from "../actions/Actions";
+import { useNavigate } from "react-router-dom";
 export default function Men() {
+    const navigate = useNavigate()
+
     const dispatch = useCartDispatch()
     const { cart } = useCartState();
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
 
     const [menProduct, setMenProduct] = useState([])
     const [item, setItem] = useState([])
     const { onOpen, isOpen, onClose } = useDisclosure()
     const getProduct = async () => {
         try {
-            const res = await Api.get(`/products/category/men's%20clothing`)
+            const res = await Api.get(`/products`)
             // console.log(res, 'ini response')
             setMenProduct(res.data)
         } catch (error) {
@@ -49,21 +52,22 @@ export default function Men() {
 
             <Box p={10}>
                 <Wrap justify='center' align='center' >
-                    {menProduct.map((product, index) => (
-                       <Card key={index}>
-                       <CardBody>
-                           <Image src={product.image} w={300} h={200} objectFit='contain' />
-                           <Heading textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w={300} p='10px 20px' fontSize='20px'>{product.title}</Heading>
-                           <Text>${product.price}</Text>
-                       </CardBody>
-                       <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
-                       <CardFooter>
-                           <Button onClick={() => handleModalDesc(product)}>Description</Button>
-                           <Spacer />
-                           <Button onClick={() => handleCart(product)}>Add to Cart</Button>
-                       </CardFooter>
-                   </Card>
-                    ))}
+                    {menProduct.filter((item) => (item.category ===
+                        "men's clothing")).map((product, index) => (
+                            <Card key={index}>
+                                <CardBody>
+                                    <Image src={product.image} w={300} h={200} objectFit='contain' />
+                                    <Heading textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w={300} p='10px 20px' fontSize='20px'>{product.title}</Heading>
+                                    <Text>${product.price}</Text>
+                                </CardBody>
+                                <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
+                                <CardFooter>
+                                    <Button  onClick={() => navigate(`/product/${product.category}/${product.id}`,{state:{data:product}})}>Description</Button>
+                                    <Spacer />
+                                    <Button onClick={() => handleCart(product)}>Add to Cart</Button>
+                                </CardFooter>
+                            </Card>
+                        ))}
                 </Wrap>
             </Box>
             <Footer />

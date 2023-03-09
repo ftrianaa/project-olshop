@@ -8,13 +8,14 @@ import { IoMdPerson } from 'react-icons/io'
 import DescriptionModal from "../components/DescriptionModal";
 import { AddCart } from "../actions/Actions";
 import { useCartDispatch, useCartState } from "../actions/Context";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
-
+    const navigate = useNavigate()
     const dispatch = useCartDispatch()
     const [products, setProducts] = useState([])
-    const [item, setItem] = useState([])
     const [quantity, setQuantity] = useState(1)
+    const [item, setItem] = useState([])
     const { cart } = useCartState();
 
     // const [cart, setCart] = useState([])
@@ -72,7 +73,7 @@ export default function Dashboard() {
                             </CardBody>
                             <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
                             <CardFooter>
-                                <Button onClick={() => handleModalDesc(product)}>Description</Button>
+                                <Button onClick={() => navigate(`/product/${product.category}/${product.id}`,{state:{data:product}})}>Description</Button>
                                 <Spacer />
                                 <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                             </CardFooter>

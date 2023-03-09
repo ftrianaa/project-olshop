@@ -27,10 +27,10 @@ export default function Header() {
             <Flex bgColor='gray.700' p={5}>
                 <Heading textTransform='uppercase' letterSpacing={8}>olimall</Heading>
                 <Spacer />
-                <Button bgColor="transparent" onClick={() => navigate('/women')}>Women</Button>
-                <Button bgColor="transparent" onClick={() => navigate('/men')}>Men</Button>
+                <Button bgColor="transparent" onClick={() => navigate("/women's clothing")}>Women</Button>
+                <Button bgColor="transparent" onClick={() => navigate("/men's clothing")}>Men</Button>
                 <Button bgColor="transparent" onClick={() => navigate('/jewelery')}>Jewelery</Button>
-                <Button bgColor="transparent" onClick={() => navigate('/electronic')}>Electronics</Button>
+                <Button bgColor="transparent" onClick={() => navigate('/electronics')}>Electronics</Button>
                 <Spacer />
                 <Spacer />
                 <InputGroup w='md'>
