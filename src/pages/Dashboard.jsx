@@ -22,8 +22,12 @@ export default function Dashboard() {
     const { onOpen, isOpen, onClose } = useDisclosure()
 
     const getProduct = async () => {
-        const res = await Api.get('/products')
-        setProducts(res.data)
+        try {
+            const res = await Api.get('/products')
+            setProducts(res.data)
+        } catch (error) {
+            throw error
+        }
     }
 
     const handleModalDesc = (product) => {
