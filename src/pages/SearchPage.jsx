@@ -54,7 +54,7 @@ export default function SearchPage() {
               </CardBody>
               <Flex justify='center'><FaStar />{item.rating.rate} | <IoMdPerson /> {item.rating.count} </Flex>
               <CardFooter>
-                <Button onClick={() => navigate(`/item/${item.category}/${item.id}`, { state: { data: item } })}>Description</Button>
+                <Button onClick={() => navigate(`/product/${item.category}/${item.id}`, { state: { data: item } })}>Description</Button>
                 <Spacer />
                 <Button onClick={() => handleCart(item)}>Add to Cart</Button>
               </CardFooter>
