@@ -50,20 +50,20 @@ export default function Jewelery() {
                 <Wrap justify='center' align='center' >
                     {jeweleryProduct.filter((item) => (item.category ===
                         "jewelery")).map((product, index) => (
-                        <Card key={index}>
-                        <CardBody>
-                            <Image src={product.image} w={300} h={200} objectFit='contain' />
-                            <Heading textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w={300} p='10px 20px' fontSize='20px'>{product.title}</Heading>
-                            <Text>${product.price}</Text>
-                        </CardBody>
-                        <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
-                        <CardFooter>
-                            <Button  onClick={() => navigate(`/product/${product.category}/${product.id}`,{state:{data:product}})}>Description</Button>
-                            <Spacer />
-                            <Button onClick={() => handleCart(product)}>Add to Cart</Button>
-                        </CardFooter>
-                    </Card>
-                    ))}
+                            <Card key={index}>
+                                <CardBody>
+                                    <Image src={product.image} w={300} h={200} objectFit='contain' />
+                                    <Heading textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w={300} p='10px 20px' fontSize='20px'>{product.title}</Heading>
+                                    <Text>${product.price}</Text>
+                                </CardBody>
+                                <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
+                                <CardFooter>
+                                    <Button onClick={() => navigate(`/product/${product.category}/${product.id}`, { state: { data: product } })}>Description</Button>
+                                    <Spacer />
+                                    <Button onClick={() => handleCart(product)}>Add to Cart</Button>
+                                </CardFooter>
+                            </Card>
+                        ))}
                 </Wrap>
             </Box>
             <Footer />

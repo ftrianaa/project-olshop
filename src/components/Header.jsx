@@ -1,5 +1,5 @@
 import { Button, Flex, Heading, Spacer, Box, InputGroup, Input, InputRightElement, Tag } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LogoutUser } from "../actions/Actions";
 import { useNavigate } from "react-router-dom";
 import { useAuthDispatch, useAuthState, useCartState } from "../actions/Context";
@@ -7,12 +7,13 @@ import { FaSearch } from "react-icons/fa";
 // import { ColorModeSwitcher } from '../ColorModeSwitcher'
 export default function Header() {
     const navigate = useNavigate()
-
     const dispatch = useAuthDispatch()
     const { user } = useAuthState()
     const { cart } = useCartState()
     // console.log(cart, 'ini cart header')
     // console.log(user, 'ini login')
+    const [searchName, setSearchName] = useState('')
+    // console.log(searchName, 'ini search name header')
     const handleLogout = () => {
         LogoutUser(dispatch)
     }
@@ -34,9 +35,9 @@ export default function Header() {
                 <Spacer />
                 <Spacer />
                 <InputGroup w='md'>
-                    <Input placeholder="Search..." />
+                    <Input placeholder="Search..." onChange={(e)=>setSearchName(e.target.value)}/>
                     <InputRightElement w='48px' >
-                        <Button onClick={() => navigate('/search')}>
+                        <Button onClick={() => navigate('/search',{state:{name:searchName}})}>
                             <FaSearch />
                         </Button>
                     </InputRightElement>
