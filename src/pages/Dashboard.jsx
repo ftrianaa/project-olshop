@@ -41,11 +41,21 @@ export default function Dashboard() {
         // console.log("ini handle cart", cart.cart, product);
         // let newArr = [];
         // console.log(newArr, "newArr")
-        
-        let newArr = {
-            products: product,
-            quantity: quantity
+
+        let newCart = cart
+        newCart = newCart.findIndex((item) => item.products.id === product.id)
+        if (newCart === -1) {
+            let newArr = {
+                products: product,
+                quantity: quantity
+            }
+            await AddCart(dispatch, [...cart, newArr]);
+        } else {
+            cart[newCart].quantity = cart[newCart].quantity + 1
         }
+        // AddCart(dispatch, [...cart, newArr])
+
+
         // let send = [arr]
         // console.log(newArr, 'snenene')
         // arr.push({ ...newArr })
@@ -53,8 +63,9 @@ export default function Dashboard() {
         // setQuantity([...quantity,...arr])
         // let hasil = arr
         // console.log(quantity, 'ini hasil')
-        await AddCart(dispatch, [...cart, newArr]);
-        
+
+        // await AddCart(dispatch, [...cart, newArr]);
+
         // console.log(cart.cart, 'ini carttt di db')
     }
     // console.log(cart, "cart setelah click dashboard")
@@ -77,7 +88,7 @@ export default function Dashboard() {
                             </CardBody>
                             <Flex justify='center'><FaStar />{product.rating.rate} | <IoMdPerson /> {product.rating.count} </Flex>
                             <CardFooter>
-                                <Button onClick={() => navigate(`/product/${product.category}/${product.id}`,{state:{data:product}})}>Description</Button>
+                                <Button onClick={() => navigate(`/product/${product.category}/${product.id}`, { state: { data: product } })}>Description</Button>
                                 <Spacer />
                                 <Button onClick={() => handleCart(product)}>Add to Cart</Button>
                             </CardFooter>

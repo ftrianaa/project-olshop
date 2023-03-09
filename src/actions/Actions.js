@@ -27,7 +27,7 @@ export const LogoutUser = (dispatch) => {
 }
 
 export const AddCart = (dispatch, payloadCart) => {
-    console.log(payloadCart, "ini Add Cart ACtion");
+    // console.log(payloadCart, "ini Add Cart ACtion");
     dispatch({
         type: 'ADD_CART',
         cart: payloadCart

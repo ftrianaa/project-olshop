@@ -27,11 +27,17 @@ export default function SearchPage() {
   }
   // console.log(find, 'ini search')
   const handleCart = async (product) => {
-    let newArr = {
-      products: product,
-      quantity: quantity
+    let newCart = cart
+    newCart = newCart.findIndex((item) => item.products.id === product.id)
+    if (newCart === -1) {
+      let newArr = {
+        products: product,
+        quantity: quantity
+      }
+      await AddCart(dispatch, [...cart, newArr]);
+    } else {
+      cart[newCart].quantity = cart[newCart].quantity + 1
     }
-    await AddCart(dispatch, [...cart, newArr]);
   }
   useEffect(() => {
     getProduct()
@@ -40,7 +46,7 @@ export default function SearchPage() {
     <>
       <Header />
       <Box p={10}>
-      <Heading p={5} textTransform="uppercase" letterSpacing={5} textAlign='left'>Search for: {name}</Heading>
+        <Heading p={5} textTransform="uppercase" letterSpacing={5} textAlign='left'>Search for: {name}</Heading>
         <Wrap justify='center' align='center' >
           {find.filter((item) => {
             return name.toLowerCase() === '' ?

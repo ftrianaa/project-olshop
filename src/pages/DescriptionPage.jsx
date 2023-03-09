@@ -28,11 +28,17 @@ export default function DescriptionPage() {
         }
     }
     const handleCart = async (product) => {
-        let newArr = {
-            products: product,
-            quantity: quantity
+        let newCart = cart
+        newCart = newCart.findIndex((item) => item.products.id === product.id)
+        if (newCart === -1) {
+            let newArr = {
+                products: product,
+                quantity: quantity
+            }
+            await AddCart(dispatch, [...cart, newArr]);
+        } else {
+            cart[newCart].quantity = cart[newCart].quantity + 1
         }
-        await AddCart(dispatch, [...cart, newArr]);
     }
     useEffect(() => {
         getProduct()
