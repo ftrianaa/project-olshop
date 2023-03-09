@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Flex, Heading, IconButton, Input, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Heading, IconButton, Image, Input, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { AddCart } from "../actions/Actions";
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import { useCartDispatch, useCartState } from "../actions/Context";
@@ -48,6 +48,7 @@ export default function CartPage() {
                     <Table variant='simple' size='lg'>
                         <Thead>
                             <Tr>
+                                <Th>Picture</Th>
                                 <Th>Name</Th>
                                 <Th>Price</Th>
                                 <Th>Quantity</Th>
@@ -59,7 +60,8 @@ export default function CartPage() {
                                 total += parseFloat(item.products.price) *  cart[index].quantity
                                 return (
                                     <Tr key={index}>
-                                        <Td>{item.products.title}</Td>
+                                        <Td><Image src={item.products.image} w={100} h={100} objectFit='contain'/></Td>
+                                        <Td><Text textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w='500px' p='10px 20px' >{item.products.title}</Text></Td>
                                         <Td>${item.products.price}</Td>
                                         <Td>
                                             <ButtonGroup size='sm' isAttached variant='outline'>
@@ -75,9 +77,10 @@ export default function CartPage() {
                         </Tbody>
                         <Tfoot>
                             <Tr>
-                                <Th>Total</Th>
+                                <Th><Text fontSize='30px'>total</Text></Th>
+                                <Th></Th>
                                 <Th>
-                                    ${total.toFixed(2)}
+                                   <Text fontSize='30px'>${total.toFixed(2)}</Text> 
                                 </Th>
                             </Tr>
                         </Tfoot>
