@@ -21,7 +21,6 @@ export default function SearchPage() {
     try {
       const res = await Api.get(`/products`)
       setFind(res.data)
-
     } catch (error) {
       throw error
     }
@@ -41,6 +40,7 @@ export default function SearchPage() {
     <>
       <Header />
       <Box p={10}>
+      <Heading p={5} textTransform="uppercase" letterSpacing={5} textAlign='left'>Search for: {name}</Heading>
         <Wrap justify='center' align='center' >
           {find.filter((item) => {
             return name.toLowerCase() === '' ?
