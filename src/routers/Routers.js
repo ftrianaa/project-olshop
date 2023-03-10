@@ -5,9 +5,11 @@ import CheckoutPage from "../pages/CheckoutPage";
 import Dashboard from "../pages/Dashboard";
 import DescriptionPage from "../pages/DescriptionPage";
 import Electronic from "../pages/ElectronicPage";
+import FormOrder from "../pages/FormOrder";
 import Jewelery from "../pages/JeweleryPage";
 import Login from "../pages/Login";
 import Men from "../pages/MenPage";
+import PaymentPage from "../pages/PaymentPage";
 import SearchPage from "../pages/SearchPage";
 import Signup from "../pages/Signup";
 import Women from "../pages/WomenPage";
@@ -25,8 +27,10 @@ export default function Routers() {
             <Route path="/modal" element={<DescriptionModal/>}/>
             <Route path="/cart" element={<CartPage/>}/>
             <Route path="/search" element={<SearchPage/>}/>
-            <Route path="/payment" element={<CheckoutPage/>}/>
+            <Route path="/confirm" element={<CheckoutPage/>}/>
             <Route path="/product/:category/:id" element={<DescriptionPage />} />
+            <Route path="/form-order" element={<FormOrder />} />
+            <Route path="/payment" element={<PaymentPage />} />
         </Routes>
     )
 }

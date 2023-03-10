@@ -1,6 +1,6 @@
 import { Box, Button, ButtonGroup, Flex, Heading, IconButton, Image, Input, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { AddCart } from "../actions/Actions";
-import { AddIcon, MinusIcon } from '@chakra-ui/icons'
+import { AddIcon, ArrowForwardIcon, MinusIcon } from '@chakra-ui/icons'
 import { useCartDispatch, useCartState } from "../actions/Context";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -12,7 +12,7 @@ export default function CartPage() {
     const { cart } = useCartState()
     const dispatch = useCartDispatch()
     const [qty, setQty] = useState(1)
-    console.log(cart, 'ini cart di carpage')
+    // console.log(cart, 'ini cart di carpage')
 
     let total = 0
 
@@ -32,7 +32,7 @@ export default function CartPage() {
         const newQty = cart[index].quantity - 1
         cart[index].quantity = newQty
         setQty(cart[index].quantity)
-        if(cart[index].quantity === 0){
+        if (cart[index].quantity === 0) {
             cart.splice(index, 1)
             AddCart(dispatch, cart)
         }
@@ -57,15 +57,15 @@ export default function CartPage() {
                         </Thead>
                         <Tbody>
                             {cart ? cart.map((item, index) => {
-                                total += parseFloat(item.products.price) *  cart[index].quantity
+                                total += parseFloat(item.products.price) * cart[index].quantity
                                 return (
                                     <Tr key={index}>
-                                        <Td><Image src={item.products.image} w={100} h={100} objectFit='contain'/></Td>
+                                        <Td><Image src={item.products.image} w={100} h={100} objectFit='contain' /></Td>
                                         <Td><Text textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w='500px' p='10px 20px' >{item.products.title}</Text></Td>
                                         <Td>${item.products.price}</Td>
                                         <Td>
                                             <ButtonGroup size='sm' isAttached variant='outline'>
-                                                <IconButton aria-label='Add to friends' icon={<MinusIcon />} onClick={() => handleQuantityMin(index)}/>
+                                                <IconButton aria-label='Add to friends' icon={<MinusIcon />} onClick={() => handleQuantityMin(index)} />
                                                 <Input type='number' size='sm' w={10} value={cart[index].quantity} />
                                                 <IconButton aria-label='Add to friends' icon={<AddIcon />} onClick={() => handleQuantityPlus(index)} />
                                             </ButtonGroup>
@@ -80,14 +80,17 @@ export default function CartPage() {
                                 <Th><Text fontSize='30px'>total</Text></Th>
                                 <Th></Th>
                                 <Th>
-                                   <Text fontSize='30px'>${total.toFixed(2)}</Text> 
+                                    <Text fontSize='30px'>${total.toFixed(2)}</Text>
                                 </Th>
                             </Tr>
                         </Tfoot>
                     </Table>
                 </TableContainer>
                 <Flex justify='right'>
-                    <Button onClick={()=>navigate('/payment', {state:{total:total}})}>Checkout</Button>
+                    <ButtonGroup isAttached variant='solid' onClick={() => navigate('/form-order')} colorScheme='green'>
+                        <Button textTransform='uppercase' letterSpacing={2}>order</Button>
+                        <IconButton aria-label='Add to friends' icon={<ArrowForwardIcon />} />
+                    </ButtonGroup>
                 </Flex>
             </Box>
             <Footer />
