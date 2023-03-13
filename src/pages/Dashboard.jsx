@@ -41,10 +41,12 @@ export default function Dashboard() {
         // console.log("ini handle cart", cart.cart, product);
         // let newArr = [];
         // console.log(newArr, "newArr")
-
+        // console.log('masuk sini ga')
         let newCart = cart
+        
+
         newCart = newCart.findIndex((item) => item.products.id === product.id)
-        if (newCart === -1) {
+        if (newCart === -1 ) {
             let newArr = {
                 products: product,
                 quantity: quantity
@@ -57,7 +59,6 @@ export default function Dashboard() {
 
 
         // let send = [arr]
-        // console.log(newArr, 'snenene')
         // arr.push({ ...newArr })
 
         // setQuantity([...quantity,...arr])
@@ -77,7 +78,7 @@ export default function Dashboard() {
         <>
             <Header />
             <Heading p={5} textTransform="uppercase" letterSpacing={5} >Dashboard</Heading>
-            <Box p={10}>
+            <Box m={10}>
                 <Wrap justify='center' align='center' >
                     {products.map((product, index) => (
                         <Card key={index}>

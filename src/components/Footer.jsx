@@ -12,7 +12,7 @@ export default function Footer() {
                 <Flex pr={10}> <FaInstagram /> <Text>olimall</Text></Flex>
                 <Flex pr={10}> <FaEnvelope /><Text> olimall@index.co</Text> </Flex>
             </Flex>
-            <Box bgColor='gray.700' textTransform='capitalize'  fontSize='15px'>
+            <Box bgColor='white' textTransform='capitalize'  fontSize='15px'>
                 <Grid templateColumns='repeat(5, 1fr)' gap={5}>
                     <GridItem  >
                         <Heading textTransform='uppercase'  fontSize='30px' p={5}>help</Heading>
@@ -65,7 +65,7 @@ export default function Footer() {
                     </GridItem>
                 </Grid>
             </Box>
-            <Box bgColor='gray.700' fontSize='30px' p={10} textAlign='left'>
+            <Box bgColor='white' fontSize='30px' p={10} textAlign='left'>
                 <Flex>
                     <Text pr={5}><FaInstagram /> </Text>
                     <Text pr={5}><FaFacebookF /> </Text>

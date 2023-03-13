@@ -37,7 +37,7 @@ export default function CheckoutPage() {
                                     {cart ? cart.map((item, index) => {
                                         total += parseFloat(item.products.price) * cart[index].quantity
                                         return (
-                                            <Tr>
+                                            <Tr key={index}>
                                                 <Td><Image src={item.products.image} w={100} h={100} objectFit='contain' /></Td>
                                                 <Td><Text textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w='250px' >{item.products.title}</Text></Td>
                                                 <Td isNumeric> ${item.products.price}</Td>

@@ -1,22 +1,26 @@
 import { ChevronRightIcon } from "@chakra-ui/icons"
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, ButtonGroup, Divider, Flex, Grid, GridItem, Heading, Image, Tag, Text } from "@chakra-ui/react"
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, ButtonGroup, Divider, Flex, Grid, GridItem, Heading, Image, Tag, Text, useDisclosure } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { FaStar } from "react-icons/fa"
 import { IoMdPerson } from "react-icons/io"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { AddCart } from "../actions/Actions"
-import { useCartDispatch, useCartState } from "../actions/Context"
+import { useAuthState, useCartDispatch, useCartState } from "../actions/Context"
+import AlertLogin from "../components/AlertLogin"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Api from "../config/Config"
 
 export default function DescriptionPage() {
-    const { category, id } = useParams()
+    const { category } = useParams()
     const { data } = useLocation().state
     const navigate = useNavigate()
     const dispatch = useCartDispatch()
     const { cart } = useCartState()
-    const [quantity, setQuantity] = useState(1)
+    const { user } = useAuthState()
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    let quantity = 1
     const [product, setProduct] = useState([])
     const getProduct = async () => {
         try {
@@ -40,6 +44,20 @@ export default function DescriptionPage() {
             cart[newCart].quantity = cart[newCart].quantity + 1
         }
     }
+    const handleBuy = (product) => {
+        let newArr = {
+            products: product,
+            quantity: quantity
+        }
+        AddCart(dispatch, [newArr]);
+        if (user || user === undefined) {
+            navigate('/form-order')
+            console.log('masuk sini ga')
+
+        }else{
+            onOpen()
+        }
+    }
     useEffect(() => {
         getProduct()
     }, [])
@@ -50,7 +68,7 @@ export default function DescriptionPage() {
             <Box p={10}>
                 <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />} textTransform='capitalize'>
                     <BreadcrumbItem>
-                        <BreadcrumbLink onClick={() => navigate('/dashboard')}>Home</BreadcrumbLink>
+                        <BreadcrumbLink onClick={() => navigate('/')}>Home</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
                         <BreadcrumbLink onClick={() => navigate(`/${category}`)}>{category}</BreadcrumbLink>
@@ -73,7 +91,7 @@ export default function DescriptionPage() {
                         </Flex>
                         <Heading >${data.price}</Heading>
                         <ButtonGroup>
-                            <Button>Buy</Button>
+                            <Button onClick={() => handleBuy(data)}>Buy</Button>
                             <Button onClick={() => handleCart(data)}>Add to Cart</Button>
                         </ButtonGroup>
                         <Text>{data.description}</Text>
@@ -82,11 +100,11 @@ export default function DescriptionPage() {
             </Box>
             <Divider />
             <Flex p={5} align='center' textAlign='left'>
-                {product.map((item) => (
-                    <Box border='black solid 1px' bgColor='gray.700' w={250} m={5} borderRadius='10px'>
+                {product.map((item, index) => (
+                    <Box border='black solid 1px' w={250} m={5} borderRadius='10px' key={index}>
                         <Image src={item.image} w={250} h={250} objectFit='contain' />
                         <Box m={5}>
-                            <Text textOverflow='ellipsis' whiteSpace='nowrap' overflow='hidden' _hover={{cursor:'pointer', textDecor:'underline'}} onClick={()=>navigate(`/product/${item.category}/${item.id}`,{state:{data:item}})}>{item.title}</Text>
+                            <Text textOverflow='ellipsis' whiteSpace='nowrap' overflow='hidden' _hover={{ cursor: 'pointer', textDecor: 'underline' }} onClick={() => navigate(`/product/${item.category}/${item.id}`, { state: { data: item } })}>{item.title}</Text>
                             <Flex><FaStar />{item.rating.rate} | <IoMdPerson /> {item.rating.count} </Flex>
                             <Text>${item.price}</Text>
                         </Box>
@@ -94,6 +112,11 @@ export default function DescriptionPage() {
                     </Box>
                 ))}
             </Flex>
+            <AlertLogin
+                isOpen={isOpen}
+                onOpen={onOpen}
+                onClose={onClose}
+            />
             <Footer />
         </>
     )

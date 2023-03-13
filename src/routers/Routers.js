@@ -17,8 +17,8 @@ import Women from "../pages/WomenPage";
 export default function Routers() {
     return (
         <Routes>
-            <Route exact path='/' element={<Login/>}/>
-            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route exact path="/" element={<Dashboard/>}/>
             <Route path="/women's clothing" element={<Women/>}/>
             <Route path="/men's clothing" element={<Men/>}/>
             <Route path="/jewelery" element={<Jewelery/>}/>

@@ -1,8 +1,9 @@
-import { Alert, AlertDescription, AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertIcon, AlertTitle, Button } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertIcon, AlertTitle, Button } from "@chakra-ui/react";
 import { useRef } from "react";
 
 export default function AlertModal(props) {
     const cancelRef = useRef()
+
     const {isOpen, onClose} = props
     // console.log(isOpen, 'ini isopen')
     return (

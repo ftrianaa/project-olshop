@@ -1,14 +1,17 @@
-import { Box, Button, ButtonGroup, Flex, Heading, IconButton, Image, Input, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Heading, IconButton, Image, Input, Table, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
 import { AddCart } from "../actions/Actions";
 import { AddIcon, ArrowForwardIcon, MinusIcon } from '@chakra-ui/icons'
-import { useCartDispatch, useCartState } from "../actions/Context";
+import { useAuthState, useCartDispatch, useCartState } from "../actions/Context";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AlertLogin from "../components/AlertLogin";
 
 export default function CartPage() {
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const navigate = useNavigate()
+    const { user } = useAuthState()
     const { cart } = useCartState()
     const dispatch = useCartDispatch()
     const [qty, setQty] = useState(1)
@@ -86,12 +89,24 @@ export default function CartPage() {
                         </Tfoot>
                     </Table>
                 </TableContainer>
-                <Flex justify='right'>
+                {user ? <Flex justify='right'>
                     <ButtonGroup isAttached variant='solid' onClick={() => navigate('/form-order')} colorScheme='green'>
                         <Button textTransform='uppercase' letterSpacing={2}>order</Button>
                         <IconButton aria-label='Add to friends' icon={<ArrowForwardIcon />} />
                     </ButtonGroup>
+                </Flex> : 
+                <Flex justify='right'>
+                <ButtonGroup isAttached variant='solid' onClick={onOpen} colorScheme='green'>
+                    <Button textTransform='uppercase' letterSpacing={2}>order</Button>
+                    <IconButton aria-label='Add to friends' icon={<ArrowForwardIcon />} />
+                </ButtonGroup>
                 </Flex>
+                }
+                <AlertLogin
+                    isOpen={isOpen}
+                    onOpen={onOpen}
+                    onClose={onClose}
+                />
             </Box>
             <Footer />
 

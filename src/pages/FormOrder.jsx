@@ -18,12 +18,10 @@ export default function FormOrder() {
     const isErrorName = user.name === ''
     const isErrorPhone = user.telephone === 0
     const isErrorAddress = user.address === ''
-    // console.log(user, 'ini user')
     return (
         <>
             <Header />
             <Heading p={5} textTransform="uppercase" letterSpacing={5} >Form order</Heading>
-
             <Box p={10}>
                 <Flex align='center' justify='center'>
                     <Box w='90%'>

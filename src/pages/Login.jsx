@@ -18,7 +18,7 @@ export default function Login() {
     }
     useEffect(() => {
         if (user !== '') {
-            return navigate('/dashboard')
+            return navigate('/')
         }
     }, [user])
     return (
