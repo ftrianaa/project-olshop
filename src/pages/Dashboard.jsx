@@ -76,7 +76,7 @@ export default function Dashboard() {
     }, [])
     return (
         <>
-            <Header />
+            <Header/>
             <Heading p={5} textTransform="uppercase" letterSpacing={5} >Dashboard</Heading>
             <Box m={10}>
                 <Wrap justify='center' align='center' >

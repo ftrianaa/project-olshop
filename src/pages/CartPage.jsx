@@ -48,11 +48,11 @@ export default function CartPage() {
             </Heading>
             <Box p={10}>
                 <TableContainer>
-                    <Table variant='simple' size='lg'>
+                    <Table variant='simple' size='md' tableLayout>
                         <Thead>
                             <Tr>
                                 <Th>Picture</Th>
-                                <Th>Name</Th>
+                                <Th >Name</Th>
                                 <Th>Price</Th>
                                 <Th>Quantity</Th>
                                 <Th>Action</Th>
@@ -64,7 +64,7 @@ export default function CartPage() {
                                 return (
                                     <Tr key={index}>
                                         <Td><Image src={item.products.image} w={100} h={100} objectFit='contain' /></Td>
-                                        <Td><Text textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w='500px' p='10px 20px' >{item.products.title}</Text></Td>
+                                        <Td ><Text textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w='50%' p='10px 20px' >{item.products.title}</Text></Td>
                                         <Td>${item.products.price}</Td>
                                         <Td>
                                             <ButtonGroup size='sm' isAttached variant='outline'>

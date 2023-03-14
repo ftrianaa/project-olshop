@@ -8,14 +8,7 @@ const AuthCartState = createContext()
 const AuthCartDispatch = createContext()
 
 export const useAuthState = () => {
-    const context = useContext(AuthStateContext)
-
-    if (context === undefined) {
-        throw new Error('useAuthState must be used within AuthProvider')
-    }
-
-    return context
-}
+    return useContext(AuthStateContext)}
 
 export const useAuthDispatch = () => {
     const context = useContext(AuthDispatchContext)
