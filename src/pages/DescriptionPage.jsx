@@ -54,7 +54,7 @@ export default function DescriptionPage() {
             navigate('/form-order')
             console.log('masuk sini ga')
 
-        }else{
+        } else {
             onOpen()
         }
     }
@@ -75,19 +75,19 @@ export default function DescriptionPage() {
                     </BreadcrumbItem>
 
                     <BreadcrumbItem isCurrentPage>
-                        <BreadcrumbLink href='#' textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w='230px'>{data.title}</BreadcrumbLink>
+                        <BreadcrumbLink href='#' textOverflow="ellipsis" overflow='hidden' whiteSpace='nowrap' w={['100px', '230px', '230px']}>{data.title}</BreadcrumbLink>
                     </BreadcrumbItem>
                 </Breadcrumb>
-                <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={5}>
+                <Grid templateColumns={['repeat(1, 1fr)', 'repeat(3, 1fr)', 'repeat(3, 1fr)']} gap={6} mt={5}>
                     <GridItem>
-                        <Box>
-                            <Image src={data.image} w={400} h={400} objectFit='contain' />
-                        </Box>
+                        <Flex justify='center' align='center'>
+                            <Image src={data.image} w={[300,300,400]} h={[300,300,400]} objectFit='contain' />
+                        </Flex>
                     </GridItem>
-                    <GridItem textAlign='left' colSpan={2}>
+                    <GridItem textAlign='left' colSpan={[1, 1, 2]}>
                         <Heading>{data.title} <Tag mt={3}>{data.category}</Tag></Heading>
-                        <Flex>
-                            <FaStar></FaStar> <Text>{data.rating.rate} (rating {data.rating.count})</Text>
+                        <Flex align='center'>
+                            <FaStar/><Text>{data.rating.rate} (rating {data.rating.count})</Text>
                         </Flex>
                         <Heading >${data.price}</Heading>
                         <ButtonGroup>
@@ -99,10 +99,12 @@ export default function DescriptionPage() {
                 </Grid>
             </Box>
             <Divider />
-            <Flex p={5} align='center' textAlign='left'>
+            <Flex p={[2,2,5]} align='center' justify='center' textAlign='left' flexWrap='wrap'>
                 {product.map((item, index) => (
-                    <Box border='black solid 1px' w={250} m={5} borderRadius='10px' key={index}>
-                        <Image src={item.image} w={250} h={250} objectFit='contain' />
+                    <Box border='black solid 1px' w={['40%','40%','16.5%']} m={[2,2,5]} borderRadius='10px' key={index} overflow='hidden'>
+                        <Flex justifyContent='center' align='center' mt={5}>
+                            <Image src={item.image} w={[100,120,120]} h={[100,120,120]} objectFit='contain' />
+                        </Flex>
                         <Box m={5}>
                             <Text textOverflow='ellipsis' whiteSpace='nowrap' overflow='hidden' _hover={{ cursor: 'pointer', textDecor: 'underline' }} onClick={() => navigate(`/product/${item.category}/${item.id}`, { state: { data: item } })}>{item.title}</Text>
                             <Flex><FaStar />{item.rating.rate} | <IoMdPerson /> {item.rating.count} </Flex>
