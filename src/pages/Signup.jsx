@@ -32,7 +32,12 @@ export default function Signup() {
           <Heading fontSize="20px" fontWeight="200">
             Get Started With
           </Heading>
-          <Heading textTransform="uppercase" letterSpacing={10} pb={10}>
+          <Heading
+            textTransform="uppercase"
+            letterSpacing={10}
+            pb={10}
+            fontSize="28px"
+          >
             Olimall
           </Heading>
           <FormControl>

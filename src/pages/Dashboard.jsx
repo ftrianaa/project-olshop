@@ -88,13 +88,18 @@ export default function Dashboard() {
   return (
     <>
       <Header />
-      <Heading p={5} textTransform="uppercase" letterSpacing={5}>
+      <Heading
+        p={5}
+        textTransform="uppercase"
+        letterSpacing={5}
+        fontSize="28px"
+      >
         Dashboard
       </Heading>
-      <Box m={[5, 10, 10]}>
+      <Box m={[5, 10, 10]} fontSize="15px">
         <Wrap justify="center" align="center">
           {products.map((product, index) => (
-            <Card key={index} w={[150, 200, 300]}>
+            <Card key={index} w={[150, 200, 250]}>
               <CardBody>
                 <Image
                   src={product.image}
@@ -106,9 +111,9 @@ export default function Dashboard() {
                   textOverflow="ellipsis"
                   overflow="hidden"
                   whiteSpace="nowrap"
-                  w={[100, 200, 300]}
-                  p={['0px', '10px 20px', '10px 20px']}
-                  fontSize="20px"
+                  w={[100, 200, 218]}
+                  p={['0px', '10px 20px', '10px']}
+                  fontSize="15px"
                 >
                   {product.title}
                 </Heading>
@@ -120,16 +125,24 @@ export default function Dashboard() {
               </Flex>
               <CardFooter display={['block', 'flex', 'flex']}>
                 <Button
+                  size="sm"
                   onClick={() =>
                     navigate(`/product/${product.category}/${product.id}`, {
                       state: { data: product },
                     })
                   }
+                  fontSize="15px"
                 >
                   Description
                 </Button>
                 <Spacer mt={[2, 0, 0]} />
-                <Button onClick={() => handleCart(product)}>Add to Cart</Button>
+                <Button
+                  onClick={() => handleCart(product)}
+                  fontSize="15px"
+                  size="sm"
+                >
+                  Add to Cart
+                </Button>
               </CardFooter>
             </Card>
           ))}

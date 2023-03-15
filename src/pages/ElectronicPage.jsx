@@ -68,17 +68,17 @@ export default function Electronic() {
         p={5}
         textTransform="uppercase"
         letterSpacing={5}
-        textDecorationLine="underline"
+        fontSize="28px"
       >
         Electronic's space
       </Heading>
 
-      <Box m={[5, 10, 10]}>
+      <Box m={[5, 10, 10]} fontSize="15px">
         <Wrap justify="center" align="center">
           {electronicProduct
             .filter(item => item.category === 'electronics')
             .map((product, index) => (
-              <Card key={index} w={[150, 200, 300]}>
+              <Card key={index} w={[150, 200, 250]}>
                 <CardBody>
                   <Image
                     src={product.image}
@@ -90,15 +90,15 @@ export default function Electronic() {
                     textOverflow="ellipsis"
                     overflow="hidden"
                     whiteSpace="nowrap"
-                    w={[100, 200, 300]}
+                    w={[100, 200, 218]}
                     p={['0px', '10px 20px', '10px 20px']}
-                    fontSize="20px"
+                    fontSize="15px"
                   >
                     {product.title}
                   </Heading>
                   <Text>${product.price}</Text>
                 </CardBody>
-                <Flex justify="center">
+                <Flex justify="center" align="center">
                   <FaStar />
                   {product.rating.rate} | <IoMdPerson /> {product.rating.count}{' '}
                 </Flex>
@@ -109,11 +109,12 @@ export default function Electronic() {
                         state: { data: product },
                       })
                     }
+                    size="sm"
                   >
                     Description
                   </Button>
                   <Spacer mt={[2, 0, 0]} />
-                  <Button onClick={() => handleCart(product)}>
+                  <Button onClick={() => handleCart(product)} size="sm">
                     Add to Cart
                   </Button>
                 </CardFooter>

@@ -50,7 +50,12 @@ export default function CheckoutPage() {
   return (
     <>
       <Header />
-      <Heading p={5} textTransform="uppercase" letterSpacing={5}>
+      <Heading
+        p={5}
+        textTransform="uppercase"
+        letterSpacing={5}
+        fontSize="28px"
+      >
         Confirmation
       </Heading>
       <Box p="0, 5">
@@ -127,25 +132,25 @@ export default function CheckoutPage() {
               </Box>
             </Box>
           </Flex>
+          <Flex justify="space-between">
+            <BackButton />
+            <ButtonGroup
+              isAttached
+              variant="solid"
+              onClick={() => navigate('/payment', { state: { total: total } })}
+              colorScheme="green"
+            >
+              <Button textTransform="uppercase" letterSpacing={2}>
+                payment
+              </Button>
+              <IconButton
+                aria-label="Add to friends"
+                icon={<ArrowForwardIcon />}
+              />
+            </ButtonGroup>
+          </Flex>
         </Box>
         {/* <Text>Total: </Text><Heading fontSize={20}>$ {location.state.total.toFixed(2)}</Heading> */}
-        <Flex justify="space-between">
-          <BackButton />
-          <ButtonGroup
-            isAttached
-            variant="solid"
-            onClick={() => navigate('/payment', { state: { total: total } })}
-            colorScheme="green"
-          >
-            <Button textTransform="uppercase" letterSpacing={2}>
-              payment
-            </Button>
-            <IconButton
-              aria-label="Add to friends"
-              icon={<ArrowForwardIcon />}
-            />
-          </ButtonGroup>
-        </Flex>
       </Box>
       <Footer />
     </>

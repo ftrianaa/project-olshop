@@ -35,7 +35,12 @@ export default function Login() {
       <Flex justify="center" h="100vh" align="center">
         <Box>
           <Box p={20}>
-            <Heading textTransform="uppercase" letterSpacing={10} pb={10}>
+            <Heading
+              textTransform="uppercase"
+              letterSpacing={10}
+              pb={10}
+              fontSize="28px"
+            >
               Olimall
             </Heading>
             <FormControl>

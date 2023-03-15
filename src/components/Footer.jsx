@@ -39,17 +39,32 @@ export default function Footer() {
       >
         <Box w={['95%', '80%', '50%']}>
           <Flex align="center" fontSize={['18px', '20px', '25px']}>
-            <Text display="flex" alignItems="center" justifyContent="center">
+            <Text
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              fontSize="15px"
+            >
               {' '}
               <FaPhone /> 080808
             </Text>
             <Spacer />
-            <Text display="flex" alignItems="center" justifyContent="center">
+            <Text
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              fontSize="15px"
+            >
               {' '}
               <FaInstagram /> olimall
             </Text>
             <Spacer />
-            <Text display="flex" alignItems="center" justifyContent="center">
+            <Text
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              fontSize="15px"
+            >
               {' '}
               <FaEnvelope /> olimall@index.co
             </Text>
@@ -64,9 +79,10 @@ export default function Footer() {
             'repeat(5, 1fr)',
           ]}
           gap={5}
+          fontSize="15px"
         >
           <GridItem colSpan={[1, 1, 1]}>
-            <Heading textTransform="uppercase" fontSize="30px" m={5}>
+            <Heading textTransform="uppercase" fontSize="15px" m={5}>
               help
             </Heading>
             <Box textAlign="left">
@@ -79,7 +95,7 @@ export default function Footer() {
             </Box>
           </GridItem>
           <GridItem colSpan={[1, 1, 1]}>
-            <Heading textTransform="uppercase" fontSize="30px" m={5}>
+            <Heading textTransform="uppercase" fontSize="15px" m={5}>
               quick links
             </Heading>
             <Box textAlign="left">
@@ -91,7 +107,7 @@ export default function Footer() {
             </Box>
           </GridItem>
           <GridItem colSpan={[2, 2, 1]}>
-            <Heading textTransform="uppercase" fontSize="30px" m={5}>
+            <Heading textTransform="uppercase" fontSize="15px" m={5}>
               about
             </Heading>
             <Flex textAlign="left" justify="center" align="center">
@@ -115,7 +131,7 @@ export default function Footer() {
             </Flex>
           </GridItem>
           <GridItem colSpan={[2, 2, 2]}>
-            <Heading textTransform="uppercase" fontSize="30px" p={5}>
+            <Heading textTransform="uppercase" fontSize="15px" p={5}>
               like being first?
             </Heading>
             <FormControl>
@@ -156,9 +172,9 @@ export default function Footer() {
             <FaYoutube />{' '}
           </Text>
         </Flex>
-        <Text fontSize="20px">Indonesia</Text>
+        <Text fontSize="15px">Indonesia</Text>
         <Heading>sponsorship</Heading>
-        <Text fontSize="20px" color="maroon">
+        <Text fontSize="15px" color="maroon">
           &copy;2023 Fitriana
         </Text>
       </Box>

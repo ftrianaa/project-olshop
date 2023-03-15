@@ -66,7 +66,12 @@ export default function CartPage() {
   return (
     <>
       <Header />
-      <Heading p={5} textTransform="uppercase" letterSpacing={5}>
+      <Heading
+        p={5}
+        textTransform="uppercase"
+        letterSpacing={5}
+        fontSize="28px"
+      >
         Cart
       </Heading>
       <Box p="5">
@@ -82,7 +87,7 @@ export default function CartPage() {
               </Tr>
             </Thead>
             <Tbody> */}
-        <Flex align="center" justify="center">
+        <Flex align="center" justify="center" fontSize="15px">
           <Box>
             {cart ? (
               cart.map((item, index) => {
@@ -102,7 +107,7 @@ export default function CartPage() {
 
                     <CardBody>
                       <Heading
-                        fontSize={18}
+                        fontSize="16px"
                         textAlign="left"
                         textOverflow="ellipsis"
                         overflow="hidden"
@@ -141,78 +146,18 @@ export default function CartPage() {
                       </Text>
                     </CardBody>
                   </Card>
-
-                  // <Tr key={index}>
-                  //   <Td>
-                  //     <Image
-                  //       src={item.products.image}
-                  //       w={[50, 100, 100]}
-                  //       h={[50, 100, 100]}
-                  //       objectFit="contain"
-                  //     />
-                  //   </Td>
-                  //   <Td>
-                  //     <Text
-                  //       textOverflow="ellipsis"
-                  //       overflow="hidden"
-                  //       whiteSpace="nowrap"
-                  //       w={['100px', '100px', '500px']}
-                  //       p={[0, '10px 20px', '10px 20px']}
-                  //       fontSize={['15px', '20px', '20px']}
-                  //     >
-                  //       {item.products.title}
-                  //     </Text>
-                  //   </Td>
-                  //   <Td>${item.products.price}</Td>
-                  //   <Td>
-                  // <ButtonGroup size="sm" isAttached variant="outline">
-                  //   <IconButton
-                  //     aria-label="Add to friends"
-                  //     icon={<MinusIcon />}
-                  //     onClick={() => handleQty('decrement', index)}
-                  //   />
-                  //   <Input
-                  //     type="number"
-                  //     size="sm"
-                  //     w={10}
-                  //     value={cart[index].quantity}
-                  //   />
-                  //   <IconButton
-                  //     aria-label="Add to friends"
-                  //     icon={<AddIcon />}
-                  //     onClick={() => handleQty('increment', index)}
-                  //   />
-                  // </ButtonGroup>
-                  //   </Td>
-                  //   <Td>
-                  //     <Button onClick={() => deleteCart(index)}>X</Button>
-                  //   </Td>
-                  // </Tr>
                 );
               })
             ) : (
               <Heading>You don't have anything in cart</Heading>
             )}
             <Box mt={5}>
-              <Heading textAlign="right">Total: ${total.toFixed(2)}</Heading>
+              <Heading textAlign="right" fontSize="18px">
+                Total: ${total.toFixed(2)}
+              </Heading>
             </Box>
           </Box>
         </Flex>
-
-        {/* </Tbody>
-            <Tfoot>
-              <Tr>
-                <Th>
-                  <Text fontSize="30px">total</Text>
-                </Th>
-                <Th></Th>
-                <Th>
-                  <Text fontSize="30px">${total.toFixed(2)}</Text>
-                </Th>
-              </Tr>
-            </Tfoot>
-          </Table>
-        </TableContainer> */}
         {user ? (
           <Flex justify="right">
             <ButtonGroup

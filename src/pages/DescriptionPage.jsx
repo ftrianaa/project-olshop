@@ -12,6 +12,8 @@ import {
   GridItem,
   Heading,
   Image,
+  Spacer,
+  Stack,
   Tag,
   Text,
   useDisclosure,
@@ -89,6 +91,7 @@ export default function DescriptionPage() {
           spacing="8px"
           separator={<ChevronRightIcon color="gray.500" />}
           textTransform="capitalize"
+          fontSize="15px"
         >
           <BreadcrumbItem>
             <BreadcrumbLink onClick={() => navigate('/')}>Home</BreadcrumbLink>
@@ -119,6 +122,7 @@ export default function DescriptionPage() {
           ]}
           gap={6}
           mt={5}
+          fontSize="15px"
         >
           <GridItem>
             <Flex justify="center" align="center">
@@ -131,32 +135,34 @@ export default function DescriptionPage() {
             </Flex>
           </GridItem>
           <GridItem textAlign="left" colSpan={[1, 1, 2]}>
-            <Heading>
-              {data.title} <Tag mt={3}>{data.category}</Tag>
-            </Heading>
-            <Flex align="center" m={['10px 0px', 0, 0]}>
-              <FaStar />
-              <Text>
-                {data.rating.rate} (rating {data.rating.count})
-              </Text>
-            </Flex>
-            <Heading m={['10px 0px', 0, 0]}>${data.price}</Heading>
-            <ButtonGroup>
-              <Button onClick={() => handleBuy(data)}>Buy</Button>
-              <Button onClick={() => handleCart(data)}>Add to Cart</Button>
-            </ButtonGroup>
-            <Text>{data.description}</Text>
+            <Stack>
+              <Heading fontSize="28px">
+                {data.title} <Tag mt={3}>{data.category}</Tag>
+              </Heading>
+              <Flex align="center" m={['10px 0px', 0, 0]}>
+                <FaStar />
+                <Text>
+                  {data.rating.rate} (rating {data.rating.count})
+                </Text>
+              </Flex>
+              <Heading m={['10px 0px', 0, 0]} fontSize="28px">
+                ${data.price}
+              </Heading>
+              <ButtonGroup>
+                <Button onClick={() => handleBuy(data)} size="sm">
+                  Buy
+                </Button>
+                <Button onClick={() => handleCart(data)} size="sm">
+                  Add to Cart
+                </Button>
+              </ButtonGroup>
+              <Text>{data.description}</Text>
+            </Stack>
           </GridItem>
         </Grid>
       </Box>
       <Divider />
-      <Flex
-        p={[2, 2, 5]}
-        align="center"
-        justify="center"
-        textAlign="left"
-        flexWrap="wrap"
-      >
+      <Flex p={[2, 2, 5]} align="center" justify="center" flexWrap="wrap">
         {product.map((item, index) => (
           <Box
             border="black solid 1px"
@@ -165,6 +171,7 @@ export default function DescriptionPage() {
             borderRadius="10px"
             key={index}
             overflow="hidden"
+            fontSize="15px"
           >
             <Flex justifyContent="center" align="center" mt={5}>
               <Image
@@ -188,13 +195,14 @@ export default function DescriptionPage() {
               >
                 {item.title}
               </Text>
-              <Flex>
+
+              <Text align="center">${item.price}</Text>
+              <Flex align="center" justify="center">
                 <FaStar />
                 {item.rating.rate} | <IoMdPerson /> {item.rating.count}{' '}
               </Flex>
-              <Text>${item.price}</Text>
             </Box>
-            <Button onClick={() => handleCart(item)} w="100%">
+            <Button onClick={() => handleCart(item)} w="100%" fontSize="15px">
               Add to Cart
             </Button>
           </Box>

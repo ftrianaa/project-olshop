@@ -57,15 +57,15 @@ export default function SearchPage() {
   return (
     <>
       <Header />
-      <Box m={[5, 10, 10]}>
-        <Heading
-          p={5}
-          textTransform="uppercase"
-          letterSpacing={5}
-          textAlign="left"
-        >
-          Search for: {name}
-        </Heading>
+      <Heading
+        textTransform="uppercase"
+        letterSpacing={5}
+        p={5}
+        fontSize="28px"
+      >
+        Search for: {name}
+      </Heading>
+      <Box m={[5, 10, 10]} fontSize="15px">
         <Wrap justify="center" align="center">
           {find
             .filter(item => {
@@ -75,27 +75,28 @@ export default function SearchPage() {
                     name.toLowerCase() === '';
             })
             .map((item, index) => (
-              <Card key={index} w={[150, 200, 300]}>
+              <Card key={index} w={[150, 200, 250]}>
                 <CardBody>
                   <Image src={item.image} w={300} h={200} objectFit="contain" />
                   <Heading
                     textOverflow="ellipsis"
                     overflow="hidden"
                     whiteSpace="nowrap"
-                    w={[100, 200, 300]}
+                    w={[100, 200, 218]}
                     p={['0px', '10px 20px', '10px 20px']}
-                    fontSize="20px"
+                    fontSize="15px"
                   >
                     {item.title}
                   </Heading>
                   <Text>${item.price}</Text>
                 </CardBody>
-                <Flex justify="center">
+                <Flex justify="center" align="center">
                   <FaStar />
                   {item.rating.rate} | <IoMdPerson /> {item.rating.count}{' '}
                 </Flex>
                 <CardFooter display={['block', 'flex', 'flex']}>
                   <Button
+                    size="sm"
                     onClick={() =>
                       navigate(`/product/${item.category}/${item.id}`, {
                         state: { data: item },
@@ -105,7 +106,9 @@ export default function SearchPage() {
                     Description
                   </Button>
                   <Spacer mt={[2, 0, 0]} />
-                  <Button onClick={() => handleCart(item)}>Add to Cart</Button>
+                  <Button onClick={() => handleCart(item)} size="sm">
+                    Add to Cart
+                  </Button>
                 </CardFooter>
               </Card>
             ))}

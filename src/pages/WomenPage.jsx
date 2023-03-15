@@ -70,17 +70,17 @@ export default function Women() {
         p={5}
         textTransform="uppercase"
         letterSpacing={5}
-        textDecorationLine="underline"
+        fontSize="28px"
       >
         women's space
       </Heading>
 
-      <Box m={[5, 10, 10]}>
+      <Box m={[5, 10, 10]} fontSize="15px">
         <Wrap justify="center" align="center">
           {womenProduct
             .filter(item => item.category === "women's clothing")
             .map((product, index) => (
-              <Card key={index} w={[150, 200, 300]}>
+              <Card key={index} w={[150, 200, 250]}>
                 <CardBody>
                   <Image
                     src={product.image}
@@ -92,30 +92,31 @@ export default function Women() {
                     textOverflow="ellipsis"
                     overflow="hidden"
                     whiteSpace="nowrap"
-                    w={[100, 200, 300]}
+                    w={[100, 200, 218]}
                     p={['0px', '10px 20px', '10px 20px']}
-                    fontSize="20px"
+                    fontSize="15px"
                   >
                     {product.title}
                   </Heading>
                   <Text>${product.price}</Text>
                 </CardBody>
-                <Flex justify="center">
+                <Flex justify="center" align="center">
                   <FaStar />
                   {product.rating.rate} | <IoMdPerson /> {product.rating.count}{' '}
                 </Flex>
                 <CardFooter display={['block', 'flex', 'flex']}>
                   <Button
+                    size="sm"
                     onClick={() =>
-                      navigate(`/product/${item.category}/${item.id}`, {
-                        state: { data: item },
+                      navigate(`/product/${product.category}/${product.id}`, {
+                        state: { data: product },
                       })
                     }
                   >
                     Description
                   </Button>
                   <Spacer mt={[2, 0, 0]} />
-                  <Button onClick={() => handleCart(product)}>
+                  <Button onClick={() => handleCart(product)} size="sm">
                     Add to Cart
                   </Button>
                 </CardFooter>

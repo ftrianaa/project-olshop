@@ -50,83 +50,105 @@ export default function Header() {
     <Flex
       bgColor="white"
       boxShadow="0 4px 6px -1px rgb(0 0 0 / 7%)"
-      p={5}
+      p={2}
       position="sticky"
       top="0"
       zIndex={555}
-      justify="space-between"
+      justify={{ base: 'left', md: 'center' }}
+      align={{ base: 'left', md: 'center' }}
       wrap="wrap"
       w="100%"
     >
-      <Box display={{ base: 'gird', md: 'none' }}>
-        <IconButton
-          onClick={isOpen ? onClose : onOpen}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          variant="outline"
-          aria-label="Menu"
-        />
-      </Box>
-      <Box display={{ base: 'none', md: 'block' }}>
-        <Heading textTransform="uppercase" letterSpacing={8}>
-          olimall
-        </Heading>
-      </Box>
-      <Box
-        display={{ base: isOpen ? 'auto' : 'none', md: 'flex' }}
-        width={{ base: 'full', md: 'auto' }}
-        alignItems="center"
-        flexGrow={1}
+      <Flex
+        justify={{ base: 'left', md: 'center' }}
+        align={{ base: 'left', md: 'center' }}
       >
-        <Button
-          bgColor="transparent"
-          onClick={() => navigate("/women's clothing")}
-        >
-          Women
-        </Button>
-        <Button
-          bgColor="transparent"
-          onClick={() => navigate("/men's clothing")}
-        >
-          Men
-        </Button>
-        <Button bgColor="transparent" onClick={() => navigate('/jewelery')}>
-          Jewelery
-        </Button>
-        <Button bgColor="transparent" onClick={() => navigate('/electronics')}>
-          Electronics
-        </Button>
-        <Spacer display={{ base: 'none', md: 'block' }} />
-        <Spacer display={{ base: 'none', md: 'block' }} />
-        <InputGroup w={['100%', '50%', '30%']}>
-          <Input
-            placeholder="Search..."
-            onChange={e => setSearchName(e.target.value)}
+        <Box display={{ base: 'gird', md: 'none' }}>
+          <IconButton
+            onClick={isOpen ? onClose : onOpen}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            variant="outline"
+            aria-label="Menu"
           />
-          <InputRightElement w={['12%', '50%', '18%']}>
-            <Button
-              onClick={() =>
-                navigate('/search', { state: { name: searchName } })
-              }
-            >
-              <FaSearch />
-            </Button>
-          </InputRightElement>
-        </InputGroup>
-        <Spacer display={{ base: 'none', md: 'block' }} />
-        <Button bgColor="transparent" onClick={() => navigate('/')}>
-          Home
-        </Button>
-        <Button bgColor="transparent" onClick={() => navigate('/cart')}>
-          {' '}
-          <BsCartFill /> &nbsp;{' '}
-          <sup>{cart === '' || cart.length === 0 ? 0 : cart.length}</sup>
-        </Button>
-        <Button bgColor="transparent" onClick={() => handleLogout()}>
-          {stat}
-        </Button>
-      </Box>
-      <Spacer />
-
+        </Box>
+        <Box display={{ base: 'none', md: 'block' }}>
+          <Heading textTransform="uppercase" letterSpacing={8}>
+            olimall
+          </Heading>
+        </Box>
+        <Box
+          display={{ base: isOpen ? 'auto' : 'none', md: 'flex' }}
+          width={{ base: 'full', md: 'auto' }}
+          alignItems="center"
+          flexGrow={1}
+        >
+          <Button
+            bgColor="transparent"
+            onClick={() => navigate("/women's clothing")}
+            fontSize="15px"
+          >
+            Women
+          </Button>
+          <Button
+            bgColor="transparent"
+            onClick={() => navigate("/men's clothing")}
+            fontSize="15px"
+          >
+            Men
+          </Button>
+          <Button
+            bgColor="transparent"
+            onClick={() => navigate('/jewelery')}
+            fontSize="15px"
+          >
+            Jewelery
+          </Button>
+          <Button
+            bgColor="transparent"
+            onClick={() => navigate('/electronics')}
+            fontSize="15px"
+          >
+            Electronics
+          </Button>
+          <Spacer display={{ base: 'none', md: 'block' }} />
+          <Spacer display={{ base: 'none', md: 'block' }} />
+          <InputGroup w={['100%', '50%', '30%']}>
+            <Input
+              placeholder="Search..."
+              onChange={e => setSearchName(e.target.value)}
+            />
+            <InputRightElement w={['12%', '50%', '18%']}>
+              <Button
+                onClick={() =>
+                  navigate('/search', { state: { name: searchName } })
+                }
+              >
+                <FaSearch />
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+          <Spacer display={{ base: 'none', md: 'block' }} />
+          <Button
+            bgColor="transparent"
+            onClick={() => navigate('/')}
+            fontSize="15px"
+          >
+            Home
+          </Button>
+          <Button bgColor="transparent" onClick={() => navigate('/cart')}>
+            {' '}
+            <BsCartFill /> &nbsp;{' '}
+            <sup>{cart === '' || cart.length === 0 ? 0 : cart.length}</sup>
+          </Button>
+          <Button
+            bgColor="transparent"
+            onClick={() => handleLogout()}
+            fontSize="15px"
+          >
+            {stat}
+          </Button>
+        </Box>
+      </Flex>
       {/* <ColorModeSwitcher /> */}
     </Flex>
     // </Box>
