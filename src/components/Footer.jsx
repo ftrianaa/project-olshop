@@ -37,7 +37,7 @@ export default function Footer() {
         align="center"
         display={['none', 'flex', 'flex']}
       >
-        <Box w={['95%', '75%', '50%']}>
+        <Box w={['95%', '80%', '50%']}>
           <Flex align="center" fontSize={['18px', '20px', '25px']}>
             <Text display="flex" alignItems="center" justifyContent="center">
               {' '}

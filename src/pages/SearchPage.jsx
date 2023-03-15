@@ -57,7 +57,7 @@ export default function SearchPage() {
   return (
     <>
       <Header />
-      <Box p={10}>
+      <Box m={[5, 10, 10]}>
         <Heading
           p={5}
           textTransform="uppercase"

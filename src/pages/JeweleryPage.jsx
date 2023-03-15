@@ -72,7 +72,7 @@ export default function Jewelery() {
         Jewelery's space
       </Heading>
 
-      <Box p={10}>
+      <Box m={[5, 10, 10]}>
         <Wrap justify="center" align="center">
           {jeweleryProduct
             .filter(item => item.category === 'jewelery')

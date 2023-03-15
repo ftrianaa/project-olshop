@@ -73,7 +73,7 @@ export default function Electronic() {
         Electronic's space
       </Heading>
 
-      <Box p={10}>
+      <Box m={[5, 10, 10]}>
         <Wrap justify="center" align="center">
           {electronicProduct
             .filter(item => item.category === 'electronics')

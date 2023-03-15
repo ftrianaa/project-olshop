@@ -75,7 +75,7 @@ export default function Women() {
         women's space
       </Heading>
 
-      <Box p={10}>
+      <Box m={[5, 10, 10]}>
         <Wrap justify="center" align="center">
           {womenProduct
             .filter(item => item.category === "women's clothing")
