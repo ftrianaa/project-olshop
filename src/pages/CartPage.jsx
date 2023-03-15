@@ -69,7 +69,7 @@ export default function CartPage() {
       <Heading p={5} textTransform="uppercase" letterSpacing={5}>
         Cart
       </Heading>
-      <Box p="0 5">
+      <Box p="5">
         {/* <TableContainer display="inline-block" size="sm">
           <Table variant="simple">
             <Thead>
@@ -107,11 +107,12 @@ export default function CartPage() {
                         textOverflow="ellipsis"
                         overflow="hidden"
                         whiteSpace="nowrap"
-                        w="70%"
+                        w={['200px', '500px', '500px']}
+                        mb={2}
                       >
                         {item.products.title}
                       </Heading>
-                      <Flex justify="space-between">
+                      <Flex justify="space-between" mb={2}>
                         <Text>${item.products.price}</Text>
                         <ButtonGroup size="sm" isAttached variant="outline">
                           <IconButton
