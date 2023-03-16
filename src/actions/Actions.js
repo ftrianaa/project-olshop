@@ -15,6 +15,11 @@ export const LoginUser = (dispatch, payloadLogin) => {
     // console.log(userData, "ini payload login JUGA")
 
     return userData;
+  } else {
+    dispatch({
+      type: 'FAILED_LOGIN',
+      payload: 'salah bang',
+    });
   }
 };
 //^ itu di atas semua action, isinya type dan payload

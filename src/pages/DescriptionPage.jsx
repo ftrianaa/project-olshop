@@ -6,6 +6,9 @@ import {
   BreadcrumbLink,
   Button,
   ButtonGroup,
+  Card,
+  CardBody,
+  CardFooter,
   Divider,
   Flex,
   Grid,
@@ -164,8 +167,7 @@ export default function DescriptionPage() {
       <Divider />
       <Flex p={[2, 2, 5]} align="center" justify="center" flexWrap="wrap">
         {product.map((item, index) => (
-          <Box
-            border="black solid 1px"
+          <Card
             w={['40%', '40%', '16.5%']}
             m={[2, 2, 5]}
             borderRadius="10px"
@@ -173,15 +175,15 @@ export default function DescriptionPage() {
             overflow="hidden"
             fontSize="15px"
           >
-            <Flex justifyContent="center" align="center" mt={5}>
-              <Image
-                src={item.image}
-                w={[100, 120, 120]}
-                h={[100, 120, 120]}
-                objectFit="contain"
-              />
-            </Flex>
-            <Box m={5}>
+            <CardBody>
+              <Flex justifyContent="center" align="center" mt={5}>
+                <Image
+                  src={item.image}
+                  w={[100, 120, 120]}
+                  h={[100, 120, 120]}
+                  objectFit="contain"
+                />
+              </Flex>
               <Text
                 textOverflow="ellipsis"
                 whiteSpace="nowrap"
@@ -192,20 +194,24 @@ export default function DescriptionPage() {
                     state: { data: item },
                   })
                 }
+                mt={5}
+                mb={2}
+                fontWeight="bold"
               >
                 {item.title}
               </Text>
-
               <Text align="center">${item.price}</Text>
               <Flex align="center" justify="center">
                 <FaStar />
                 {item.rating.rate} | <IoMdPerson /> {item.rating.count}{' '}
               </Flex>
-            </Box>
-            <Button onClick={() => handleCart(item)} w="100%" fontSize="15px">
-              Add to Cart
-            </Button>
-          </Box>
+            </CardBody>
+            <CardFooter>
+              <Button onClick={() => handleCart(item)} w="100%" fontSize="15px">
+                Add to Cart
+              </Button>
+            </CardFooter>
+          </Card>
         ))}
       </Flex>
       <AlertLogin isOpen={isOpen} onOpen={onOpen} onClose={onClose} />

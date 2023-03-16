@@ -4,11 +4,19 @@ import {
   ButtonGroup,
   Card,
   CardBody,
+  CardFooter,
   Flex,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  Grid,
+  GridItem,
   Heading,
   IconButton,
   Image,
   Input,
+  InputGroup,
+  InputRightElement,
   Spacer,
   Stack,
   Table,
@@ -33,6 +41,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import AlertLogin from '../components/AlertLogin';
+import { useState } from 'react';
 
 export default function CartPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,9 +50,11 @@ export default function CartPage() {
   const { cart } = useCartState();
   const dispatch = useCartDispatch();
   // console.log(cart, 'ini cart di carpage')
-
+  const [promo, setPromo] = useState('');
   let total = 0;
-
+  let disc = 0;
+  const [discount, setDiscount] = useState(0);
+  const [errors, setErrors] = useState(false);
   const deleteCart = index => {
     cart.splice(index, 1);
     AddCart(dispatch, cart);
@@ -62,7 +73,21 @@ export default function CartPage() {
     }
     AddCart(dispatch, newArr);
   };
+  const handlePromo = () => {
+    let newPromo = promo;
+    newPromo.toLocaleLowerCase();
+    if (newPromo === 'promograndlaunching') {
+      // console.log(total, 'ini total');
+      disc = 10;
+      setDiscount(total - disc);
+      setErrors(false);
 
+      // console.log(totalFix, 'ini hasil total');
+    } else {
+      setDiscount(total - disc);
+      setErrors(true);
+    }
+  };
   return (
     <>
       <Header />
@@ -87,13 +112,13 @@ export default function CartPage() {
               </Tr>
             </Thead>
             <Tbody> */}
-        <Flex align="center" justify="center" fontSize="15px">
-          <Box>
+        <Grid templateColumns="repeat(3, 1fr)" fontSize="15px" gap={5}>
+          <GridItem colSpan={2} w="100%">
             {cart ? (
               cart.map((item, index) => {
                 total += parseFloat(item.products.price) * cart[index].quantity;
                 return (
-                  <Card direction="row" w="100%" mt={5}>
+                  <Card direction="row" mt={5}>
                     <Flex justify="center" align="center" p={5}>
                       <Image
                         src={item.products.image}
@@ -151,13 +176,58 @@ export default function CartPage() {
             ) : (
               <Heading>You don't have anything in cart</Heading>
             )}
-            <Box mt={5}>
-              <Heading textAlign="right" fontSize="18px">
-                Total: ${total.toFixed(2)}
-              </Heading>
-            </Box>
-          </Box>
-        </Flex>
+          </GridItem>
+          <GridItem colSpan={1}>
+            <Card mt={5}>
+              <CardBody>
+                <Heading
+                  textAlign="center"
+                  fontSize="18px"
+                  textTransform="uppercase"
+                  letterSpacing={1}
+                >
+                  You have ({cart.length}) items
+                </Heading>
+              </CardBody>
+              <Flex align="center" justify="space-between" m="0 5%">
+                <Text textAlign="right" fontSize="18px">
+                  Item sub-total:
+                </Text>
+                <Text textAlign="left" fontSize="18px">
+                  ${total.toFixed(2)}
+                </Text>
+              </Flex>
+              <FormControl overflow="hidden" isInvalid={errors}>
+                <FormHelperText>Enter your promo here</FormHelperText>
+                <Flex justify="center">
+                  <InputGroup w="90%" size="sm">
+                    <Input onChange={e => setPromo(e.target.value)} />
+                    <InputRightElement w="60px">
+                      <Button size="sm" onClick={() => handlePromo()}>
+                        Apply{' '}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </Flex>
+                {!errors ? (
+                  <></>
+                ) : (
+                  <FormErrorMessage m="0 5%">
+                    Sorry, you input wrong promo
+                  </FormErrorMessage>
+                )}
+              </FormControl>
+              <Flex align="center" justify="space-between" m={5}>
+                <Text textAlign="right" fontSize="18px">
+                  Estimated Total:
+                </Text>
+                <Text textAlign="left" fontSize="18px">
+                  ${discount ? discount.toFixed(2) : total.toFixed(2)}
+                </Text>
+              </Flex>
+            </Card>
+          </GridItem>
+        </Grid>
         {user ? (
           <Flex justify="right">
             <ButtonGroup

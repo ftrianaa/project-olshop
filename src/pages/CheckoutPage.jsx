@@ -9,15 +9,7 @@ import {
   IconButton,
   Image,
   Input,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
   Text,
-  Tfoot,
-  Th,
-  Thead,
-  Tr,
 } from '@chakra-ui/react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';

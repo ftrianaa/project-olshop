@@ -12,12 +12,19 @@ export const initialState = {
 };
 
 export const AuthReducer = (initialState, action) => {
+  // console.log(action, 'ini actionnss');
   switch (action.type) {
     case 'SUCCESS_LOGIN':
       return {
         ...initialState,
         user: action.user,
         isLogin: true,
+      };
+    case 'FAILED_LOGIN':
+      return {
+        ...initialState,
+        user: action.payload,
+        isLogin: false,
       };
     case 'LOGOUT':
       return {

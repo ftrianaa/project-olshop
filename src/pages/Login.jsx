@@ -16,9 +16,10 @@ import { useAuthDispatch, useAuthState } from '../actions/Context';
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAuthDispatch();
-  const { user } = useAuthState();
+  const { user, isLogin } = useAuthState();
 
-  // console.log(isLogin, 'ini context')
+  // console.log(user, 'ini context');
+  // console.log(isLogin, 'ini isLogin');
   const [users, setUsers] = useState({
     email: '',
   });
