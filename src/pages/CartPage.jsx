@@ -54,7 +54,7 @@ export default function CartPage() {
   let total = 0;
   let disc = 0;
   const [discount, setDiscount] = useState(0);
-  const [errors, setErrors] = useState(false);
+  const [errors, setErrors] = useState('');
   const deleteCart = index => {
     cart.splice(index, 1);
     AddCart(dispatch, cart);
@@ -197,7 +197,7 @@ export default function CartPage() {
                   ${total.toFixed(2)}
                 </Text>
               </Flex>
-              <FormControl overflow="hidden" isInvalid={errors}>
+              <FormControl overflow="hidden" isInvalid={errors} _hover="none">
                 <FormHelperText>Enter your promo here</FormHelperText>
                 <Flex justify="center">
                   <InputGroup w="90%" size="sm">
@@ -217,6 +217,13 @@ export default function CartPage() {
                   </FormErrorMessage>
                 )}
               </FormControl>
+              {errors === false ? (
+                <Text fontSize="14px" textAlign="left" color="green" m="0 5%">
+                  Yeaaay! You have applied promo
+                </Text>
+              ) : (
+                <></>
+              )}
               <Flex align="center" justify="space-between" m={5}>
                 <Text textAlign="right" fontSize="18px">
                   Estimated Total:
@@ -250,7 +257,7 @@ export default function CartPage() {
             <ButtonGroup
               isAttached
               variant="solid"
-              onClick={onOpen}
+              onClick={() => navigate('/checkout-method')}
               colorScheme="green"
             >
               <Button textTransform="uppercase" letterSpacing={2}>
