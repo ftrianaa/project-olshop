@@ -71,7 +71,7 @@ export default function MethodCheckout() {
             >
               Guest checktout
             </Heading>
-            <Button onClick={() => navigate('/guest-checkout')}>
+            <Button onClick={() => navigate('/checkout')}>
               checkout as guest
             </Button>
           </GridItem>
@@ -79,7 +79,7 @@ export default function MethodCheckout() {
         <br />
         <Flex justify="space-between">
           <BackButton />
-          {!isErrorAddress && !isErrorName && !isErrorPhone ? (
+          {/* {!isErrorAddress && !isErrorName && !isErrorPhone ? (
             <ButtonGroup
               isAttached
               variant="solid"
@@ -110,7 +110,7 @@ export default function MethodCheckout() {
               />
             </ButtonGroup>
           )}
-          <AlertModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+          <AlertModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} /> */}
         </Flex>
       </Box>
       <Footer />

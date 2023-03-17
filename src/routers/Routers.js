@@ -34,7 +34,7 @@ export default function Routers() {
       <Route path="/form-order" element={<FormOrder />} />
       <Route path="/payment" element={<PaymentPage />} />
       <Route path="/checkout-method" element={<MethodCheckout />} />
-      <Route path="/guest-checkout" element={<GuestCheckout />} />
+      <Route path="/checkout" element={<GuestCheckout />} />
     </Routes>
   );
 }

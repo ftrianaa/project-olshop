@@ -1,6 +1,7 @@
 export const LoginUser = (dispatch, payloadLogin) => {
   const userData = {
     email: payloadLogin.email,
+    nama: 'fitri',
   };
   const userPass = {
     password: payloadLogin.password,
@@ -67,4 +68,12 @@ export const SignUp = (dispatch, payloadSignUp) => {
     payload: payloadSignUp,
   });
   localStorage.setItem('user', JSON.stringify(userData));
+};
+
+export const AddPromo = (dispatch, payloadDiscount) => {
+  // console.log(payloadDiscount, 'ini discount di actionss');
+  dispatch({
+    type: 'ADD_PROMO',
+    discount: payloadDiscount,
+  });
 };

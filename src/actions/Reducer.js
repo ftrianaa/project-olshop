@@ -3,16 +3,19 @@ let user = localStorage.getItem('user')
   : '';
 let cart = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
-  : [];
-
+  : '';
+let discount = localStorage.getItem('discount')
+  ? JSON.parse(localStorage.getItem('discount'))
+  : 0;
 export const initialState = {
   user: '' || user,
   isLogin: false,
-  cart: [] || cart,
+  cart: '' || cart,
+  discount: 0 || discount,
 };
 
 export const AuthReducer = (initialState, action) => {
-  // console.log(action, 'ini actionnss');
+  console.log(action, 'ini actionnss');
   switch (action.type) {
     case 'SUCCESS_LOGIN':
       return {
@@ -53,11 +56,14 @@ export const AuthReducer = (initialState, action) => {
         isLogin: true,
         user: action.payload,
       };
+    case 'ADD_PROMO':
+      return {
+        ...initialState,
+        discount: action.discount,
+      };
     default:
       return {
-        user: '',
-        isLogin: false,
-        cart: [],
+        ...initialState,
       };
   }
 };

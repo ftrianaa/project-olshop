@@ -5,6 +5,7 @@ import {
   Card,
   CardBody,
   CardFooter,
+  CloseButton,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -30,7 +31,7 @@ import {
   Tr,
   useDisclosure,
 } from '@chakra-ui/react';
-import { AddCart } from '../actions/Actions';
+import { AddCart, AddPromo } from '../actions/Actions';
 import { AddIcon, ArrowForwardIcon, MinusIcon } from '@chakra-ui/icons';
 import {
   useAuthState,
@@ -47,13 +48,16 @@ export default function CartPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const { user } = useAuthState();
+  console.log(user.email, 'ini finaltotal di carttt');
   const { cart } = useCartState();
   const dispatch = useCartDispatch();
-  // console.log(cart, 'ini cart di carpage')
+  console.log(cart, 'ini cart di carpage');
+  // console.log(discount, 'ini discount di guest cart');
+
   const [promo, setPromo] = useState('');
   let total = 0;
   let disc = 0;
-  const [discount, setDiscount] = useState(0);
+  const [discounts, setDiscount] = useState(0);
   const [errors, setErrors] = useState('');
   const deleteCart = index => {
     cart.splice(index, 1);
@@ -81,8 +85,9 @@ export default function CartPage() {
       disc = 10;
       setDiscount(total - disc);
       setErrors(false);
-
+      AddPromo(dispatch, 10);
       // console.log(totalFix, 'ini hasil total');
+      console.log('ini discount di guest cart handle');
     } else {
       setDiscount(total - disc);
       setErrors(true);
@@ -100,18 +105,6 @@ export default function CartPage() {
         Cart
       </Heading>
       <Box p="5">
-        {/* <TableContainer display="inline-block" size="sm">
-          <Table variant="simple">
-            <Thead>
-              <Tr>
-                <Th>Picture</Th>
-                <Th>Name</Th>
-                <Th>Price</Th>
-                <Th>Quantity</Th>
-                <Th>Action</Th>
-              </Tr>
-            </Thead>
-            <Tbody> */}
         <Grid templateColumns="repeat(3, 1fr)" fontSize="15px" gap={5}>
           <GridItem colSpan={2} w="100%">
             {cart ? (
@@ -129,7 +122,6 @@ export default function CartPage() {
                         objectFit="contain"
                       />
                     </Flex>
-
                     <CardBody>
                       <Heading
                         fontSize="16px"
@@ -170,6 +162,9 @@ export default function CartPage() {
                         ).toFixed(2)}
                       </Text>
                     </CardBody>
+                    <Flex>
+                      <CloseButton size="sm" onClick={() => deleteCart()} />
+                    </Flex>
                   </Card>
                 );
               })
@@ -229,47 +224,56 @@ export default function CartPage() {
                   Estimated Total:
                 </Text>
                 <Text textAlign="left" fontSize="18px">
-                  ${discount ? discount.toFixed(2) : total.toFixed(2)}
+                  ${discounts ? discounts.toFixed(2) : total.toFixed(2)}
                 </Text>
               </Flex>
             </Card>
+
+            {user !== '' && cart.length !== 0 ? (
+              <Flex justify="right" mt={5}>
+                <ButtonGroup
+                  isAttached
+                  variant="solid"
+                  onClick={() => navigate('/checkout')}
+                  colorScheme="green"
+                  size="sm"
+                >
+                  <Button textTransform="uppercase" letterSpacing={2}>
+                    order
+                  </Button>
+                  <IconButton
+                    aria-label="Add to friends"
+                    icon={<ArrowForwardIcon />}
+                  />
+                </ButtonGroup>
+              </Flex>
+            ) : (
+              <></>
+            )}
+            {user === '' && cart.length !== 0 ? (
+              <Flex justify="right" mt={5}>
+                <ButtonGroup
+                  isAttached
+                  variant="solid"
+                  onClick={() => navigate('/checkout-method')}
+                  colorScheme="green"
+                  size="sm"
+                >
+                  <Button textTransform="uppercase" letterSpacing={2}>
+                    order
+                  </Button>
+                  <IconButton
+                    aria-label="Add to friends"
+                    icon={<ArrowForwardIcon />}
+                  />
+                </ButtonGroup>
+              </Flex>
+            ) : (
+              <></>
+            )}
           </GridItem>
         </Grid>
-        {user ? (
-          <Flex justify="right">
-            <ButtonGroup
-              isAttached
-              variant="solid"
-              onClick={() => navigate('/form-order')}
-              colorScheme="green"
-            >
-              <Button textTransform="uppercase" letterSpacing={2}>
-                order
-              </Button>
-              <IconButton
-                aria-label="Add to friends"
-                icon={<ArrowForwardIcon />}
-              />
-            </ButtonGroup>
-          </Flex>
-        ) : (
-          <Flex justify="right">
-            <ButtonGroup
-              isAttached
-              variant="solid"
-              onClick={() => navigate('/checkout-method')}
-              colorScheme="green"
-            >
-              <Button textTransform="uppercase" letterSpacing={2}>
-                order
-              </Button>
-              <IconButton
-                aria-label="Add to friends"
-                icon={<ArrowForwardIcon />}
-              />
-            </ButtonGroup>
-          </Flex>
-        )}
+
         <AlertLogin isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
       </Box>
       <Footer />
