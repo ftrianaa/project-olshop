@@ -93,8 +93,17 @@ export default function GuestCheckout() {
     <>
       <Header />
       <Box p={10}>
-        <Grid templateColumns="repeat(3,1fr)" gap={10} fontSize="13px">
-          <GridItem colSpan={2}>
+        <Grid
+          templateRows={['repeat(1, 1fr)', 'repeat(0, 1fr)', 'repeat(0, 1fr)']}
+          templateColumns={[
+            'repeat(0, 1fr)',
+            'repeat(3, 1fr)',
+            'repeat(3, 1fr)',
+          ]}
+          gap={10}
+          fontSize="13px"
+        >
+          <GridItem colSpan={[1, 2, 2]}>
             <Stack>
               <Card>
                 <CardBody>
@@ -213,7 +222,7 @@ export default function GuestCheckout() {
                   </Heading>
                   {payment ? (
                     <>
-                      <FormControl mt={5}>
+                      <FormControl m={5}>
                         {/* <FormLabel textAlign="center">
                         Choose your payment
                       </FormLabel> */}
@@ -290,16 +299,13 @@ export default function GuestCheckout() {
                           //  onClick={() => navigate('/checkout-method')}
                           colorScheme="red"
                           size="sm"
+                          onClick={() => handleBackToPayment()}
                         >
                           <IconButton
                             aria-label="Add to friends"
                             icon={<ArrowBackIcon />}
                           />
-                          <Button
-                            textTransform="uppercase"
-                            letterSpacing={2}
-                            onClick={() => handleBackToPayment()}
-                          >
+                          <Button textTransform="uppercase" letterSpacing={2}>
                             back
                           </Button>
                         </ButtonGroup>
@@ -309,12 +315,9 @@ export default function GuestCheckout() {
                           //  onClick={() => navigate('/checkout-method')}
                           colorScheme="green"
                           size="sm"
+                          onClick={() => onOpen()}
                         >
-                          <Button
-                            textTransform="uppercase"
-                            letterSpacing={2}
-                            onClick={() => onOpen()}
-                          >
+                          <Button textTransform="uppercase" letterSpacing={2}>
                             confirm
                           </Button>
                           <IconButton
@@ -351,12 +354,12 @@ export default function GuestCheckout() {
                           direction="row"
                           textAlign="left"
                           fontSize="15px"
-                          m={5}
+                          m={[4, 4, 5]}
                         >
                           <Image
                             src={item.products.image}
-                            w="100px"
-                            h="100px"
+                            w={['50px', '50px', '80px']}
+                            h={['50px', '50px', '80px']}
                             objectFit="contain"
                           />
 
@@ -365,7 +368,7 @@ export default function GuestCheckout() {
                               fontWeight="bold"
                               textOverflow="ellipsis"
                               whiteSpace="nowrap"
-                              w="140px"
+                              w={['100px', '140px', '140px']}
                               overflow="hidden"
                             >
                               {item.products.title}

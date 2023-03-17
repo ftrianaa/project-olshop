@@ -105,8 +105,17 @@ export default function CartPage() {
         Cart
       </Heading>
       <Box p="5">
-        <Grid templateColumns="repeat(3, 1fr)" fontSize="15px" gap={5}>
-          <GridItem colSpan={2} w="100%">
+        <Grid
+          templateRows={['repeat(1, 1fr)', 'repeat(0, 1fr)', 'repeat(0, 1fr)']}
+          templateColumns={[
+            'repeat(0, 1fr)',
+            'repeat(3, 1fr)',
+            'repeat(3, 1fr)',
+          ]}
+          fontSize="15px"
+          gap={5}
+        >
+          <GridItem colSpan={[1, 2, 2]} w="100%">
             {cart ? (
               cart.map((item, index) => {
                 total += parseFloat(item.products.price) * cart[index].quantity;
@@ -116,8 +125,8 @@ export default function CartPage() {
                       <Image
                         src={item.products.image}
                         alt={item.products.title}
-                        w={100}
-                        h={100}
+                        w={[50, '40px', 100]}
+                        h={[50, '40px', 100]}
                         maxW="none"
                         objectFit="contain"
                       />
@@ -129,7 +138,7 @@ export default function CartPage() {
                         textOverflow="ellipsis"
                         overflow="hidden"
                         whiteSpace="nowrap"
-                        w={['200px', '500px', '500px']}
+                        w={['150px', '150px', '250px']}
                         mb={2}
                       >
                         {item.products.title}
@@ -172,7 +181,7 @@ export default function CartPage() {
               <Heading>You don't have anything in cart</Heading>
             )}
           </GridItem>
-          <GridItem colSpan={1}>
+          <GridItem colSpan={[1, 1, 1]}>
             <Card mt={5}>
               <CardBody>
                 <Heading
