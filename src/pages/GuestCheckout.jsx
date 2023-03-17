@@ -209,7 +209,7 @@ export default function GuestCheckout() {
                   <Button
                     w="100%"
                     onClick={() => handlePayment()}
-                    isDisabled={!payment}
+                    isDisabled={!payment && buttonPayment}
                   >
                     Continue to Payment
                   </Button>
