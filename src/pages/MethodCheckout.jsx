@@ -72,7 +72,7 @@ export default function MethodCheckout() {
               Guest checktout
             </Heading>
             <Button onClick={() => navigate('/checkout')}>
-              checkout as guest
+              Checkout as guest
             </Button>
           </GridItem>
         </Grid>
