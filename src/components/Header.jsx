@@ -10,7 +10,7 @@ import {
   useDisclosure,
   IconButton,
 } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { LogoutUser } from '../actions/Actions';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -24,7 +24,6 @@ import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 
 // import { ColorModeSwitcher } from '../ColorModeSwitcher'
 export default function Header() {
-  const [stat, setStat] = useState('LogIn');
   const navigate = useNavigate();
   const dispatch = useAuthDispatch();
   const { user } = useAuthState();
@@ -38,12 +37,6 @@ export default function Header() {
     navigate('/login');
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  useEffect(() => {
-    if (user === undefined || user) {
-      setStat('LogOut');
-    }
-  }, [user]);
 
   return (
     // <Box >
@@ -145,7 +138,7 @@ export default function Header() {
             onClick={() => handleLogout()}
             fontSize="15px"
           >
-            {stat}
+            {user === undefined || user ? 'LogOut' : 'LogIn'}
           </Button>
         </Box>
       </Flex>

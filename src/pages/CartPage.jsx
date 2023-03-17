@@ -4,7 +4,6 @@ import {
   ButtonGroup,
   Card,
   CardBody,
-  CardFooter,
   CloseButton,
   Flex,
   FormControl,
@@ -18,17 +17,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Spacer,
-  Stack,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
   Text,
-  Tfoot,
-  Th,
-  Thead,
-  Tr,
   useDisclosure,
 } from '@chakra-ui/react';
 import { AddCart, AddPromo } from '../actions/Actions';
@@ -48,16 +37,16 @@ export default function CartPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
   const { user } = useAuthState();
-  console.log(user.email, 'ini finaltotal di carttt');
-  const { cart } = useCartState();
+  // console.log(user.email, 'ini finaltotal di carttt');
+  const { cart, discount } = useCartState();
   const dispatch = useCartDispatch();
-  console.log(cart, 'ini cart di carpage');
+  // console.log(cart, 'ini cart di carpage');
   // console.log(discount, 'ini discount di guest cart');
 
   const [promo, setPromo] = useState('');
   let total = 0;
-  let disc = 0;
-  const [discounts, setDiscount] = useState(0);
+  // let disc = 0;
+  // const [discounts, setDiscount] = useState(0);
   const [errors, setErrors] = useState('');
   const deleteCart = index => {
     cart.splice(index, 1);
@@ -82,14 +71,14 @@ export default function CartPage() {
     newPromo.toLocaleLowerCase();
     if (newPromo === 'promograndlaunching') {
       // console.log(total, 'ini total');
-      disc = 10;
-      setDiscount(total - disc);
+      // disc = 10;
+      // setDiscount(total - disc);
       setErrors(false);
       AddPromo(dispatch, 10);
       // console.log(totalFix, 'ini hasil total');
       console.log('ini discount di guest cart handle');
     } else {
-      setDiscount(total - disc);
+      // setDiscount(total - disc);
       setErrors(true);
     }
   };
@@ -120,7 +109,7 @@ export default function CartPage() {
               cart.map((item, index) => {
                 total += parseFloat(item.products.price) * cart[index].quantity;
                 return (
-                  <Card direction="row" mt={5}>
+                  <Card direction="row" mt={5} key={index}>
                     <Flex justify="center" align="center" p={5}>
                       <Image
                         src={item.products.image}
@@ -156,6 +145,7 @@ export default function CartPage() {
                             size="sm"
                             w={10}
                             value={cart[index].quantity}
+                            readOnly={true}
                           />
                           <IconButton
                             aria-label="Add to friends"
@@ -194,14 +184,14 @@ export default function CartPage() {
                 </Heading>
               </CardBody>
               <Flex align="center" justify="space-between" m="0 5%">
-                <Text textAlign="right" fontSize="18px">
+                <Text textAlign="right" fontSize="16px">
                   Item sub-total:
                 </Text>
-                <Text textAlign="left" fontSize="18px">
+                <Text textAlign="left" fontSize="16px">
                   ${total.toFixed(2)}
                 </Text>
               </Flex>
-              <FormControl overflow="hidden" isInvalid={errors} _hover="none">
+              <FormControl overflow="hidden" isInvalid={errors}>
                 <FormHelperText>Enter your promo here</FormHelperText>
                 <Flex justify="center">
                   <InputGroup w="90%" size="sm">
@@ -229,11 +219,11 @@ export default function CartPage() {
                 <></>
               )}
               <Flex align="center" justify="space-between" m={5}>
-                <Text textAlign="right" fontSize="18px">
+                <Text textAlign="right" fontSize="16px">
                   Estimated Total:
                 </Text>
-                <Text textAlign="left" fontSize="18px">
-                  ${discounts ? discounts.toFixed(2) : total.toFixed(2)}
+                <Text textAlign="left" fontSize="16px">
+                  ${(total - parseFloat(discount)).toFixed(2)}
                 </Text>
               </Flex>
             </Card>

@@ -38,7 +38,7 @@ export default function GuestCheckout() {
   const [bank, setBank] = useState('');
   const [buttonPayment, setButtonPayment] = useState(false);
   const { cart, discount } = useCartState();
-  console.log(discount, 'ini discount di guest CO');
+  // console.log(discount, 'ini discount di guest CO');
   let total = 0;
   const [user, setUser] = useState({
     name: '',
@@ -206,7 +206,11 @@ export default function GuestCheckout() {
                   </FormControl>
                 </CardBody>
                 <CardFooter>
-                  <Button w="100%" onClick={() => handlePayment()}>
+                  <Button
+                    w="100%"
+                    onClick={() => handlePayment()}
+                    isDisabled={!payment}
+                  >
                     Continue to Payment
                   </Button>
                 </CardFooter>
@@ -348,7 +352,7 @@ export default function GuestCheckout() {
                   cart.map((item, index) => {
                     total += item.products.price * item.quantity;
                     return (
-                      <>
+                      <Box key={index}>
                         <Stack
                           spacing={3}
                           direction="row"
@@ -385,13 +389,13 @@ export default function GuestCheckout() {
                             </Flex>
                           </Stack>
                         </Stack>
-                      </>
+                      </Box>
                     );
                   })
                 ) : (
                   <></>
                 )}
-                <Divider />
+                <Divider mb={5} />
                 <Flex justify="space-between">
                   <Text fontSize="15px" textAlign="right">
                     Items:

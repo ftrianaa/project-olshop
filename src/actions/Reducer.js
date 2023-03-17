@@ -15,7 +15,7 @@ export const initialState = {
 };
 
 export const AuthReducer = (initialState, action) => {
-  console.log(action, 'ini actionnss');
+  // console.log(action, 'ini actionnss');
   switch (action.type) {
     case 'SUCCESS_LOGIN':
       return {
@@ -48,6 +48,7 @@ export const AuthReducer = (initialState, action) => {
       return {
         ...initialState,
         cart: [],
+        discount: 0,
       };
     case 'SIGN_UP':
       //   console.log(action, 'ini actionsss');
