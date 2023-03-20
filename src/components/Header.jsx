@@ -75,9 +75,20 @@ export default function Header() {
           alignItems="center"
           flexGrow={1}
         >
+          {/* {category.map((catalogue, index) => (
+            <Button
+              bgColor="transparent"
+              onClick={() => navigate(`/${catalogue}`)}
+              fontSize="15px"
+              key={index}
+            >
+              {catalogue}
+            </Button>
+          ))} */}
+
           <Button
             bgColor="transparent"
-            onClick={() => navigate("/women's clothing")}
+            onClick={() => navigate(`/women's clothing`)}
             fontSize="15px"
           >
             Women

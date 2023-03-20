@@ -15,7 +15,6 @@ import {
   GridItem,
   Heading,
   Image,
-  Spacer,
   Stack,
   Tag,
   Text,
@@ -77,7 +76,7 @@ export default function DescriptionPage() {
     AddCart(dispatch, [newArr]);
     if (user || user === undefined) {
       navigate('/form-order');
-      console.log('masuk sini ga');
+      // console.log('masuk sini ga');
     } else {
       onOpen();
     }

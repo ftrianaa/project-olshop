@@ -9,43 +9,54 @@ import {
   Image,
   Spacer,
   Text,
-  useDisclosure,
+  //   useDisclosure,
   Wrap,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import DescriptionModal from '../components/DescriptionModal';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Api from '../config/Config';
 import { FaStar } from 'react-icons/fa';
 import { IoMdPerson } from 'react-icons/io';
-import { useCartDispatch, useCartState } from '../actions/Context';
+// import DescriptionModal from '../components/DescriptionModal';
 import { AddCart } from '../actions/Actions';
-import { useNavigate } from 'react-router-dom';
-export default function Jewelery() {
+import { useCartDispatch, useCartState } from '../actions/Context';
+import { useNavigate, useParams } from 'react-router-dom';
+
+export default function CategoryPage() {
+  const { category } = useParams();
   const navigate = useNavigate();
   const dispatch = useCartDispatch();
+  const [products, setProducts] = useState([]);
+  //   const [item, setItem] = useState([]);
   const { cart } = useCartState();
-  const [quantity, setQuantity] = useState(1);
-  const [jeweleryProduct, setJeweleryProduct] = useState([]);
-  const [item, setItem] = useState([]);
-  const { onOpen, isOpen, onClose } = useDisclosure();
+  let quantity = 1;
+  // const [cart, setCart] = useState([])
+  //   const { onOpen, isOpen, onClose } = useDisclosure();
+
   const getProduct = async () => {
     try {
-      const res = await Api.get(`/products`);
-      // console.log(res, 'ini response')
-      setJeweleryProduct(res.data);
+      const res = await Api.get('/products');
+      setProducts(res.data);
     } catch (error) {
       throw error;
     }
   };
-  const handleModalDesc = product => {
-    onOpen();
-    setItem(product);
-    console.log(item, 'ini item db');
-  };
+
+  //   const handleModalDesc = product => {
+  //     onOpen();
+  //     setItem(product);
+  // console.log(item, 'ini item db')
+  //   };
+  // console.log(cart, "cart di dashboard")
+
   const handleCart = async product => {
+    // console.log("ini handle cart", cart.cart, product);
+    // let newArr = [];
+    // console.log(newArr, "newArr")
+    // console.log('masuk sini ga')
     let newCart = cart;
+
     newCart = newCart.findIndex(item => item.products.id === product.id);
     if (newCart === -1) {
       let newArr = {
@@ -56,7 +67,21 @@ export default function Jewelery() {
     } else {
       cart[newCart].quantity = cart[newCart].quantity + 1;
     }
+    // AddCart(dispatch, [...cart, newArr])
+
+    // let send = [arr]
+    // arr.push({ ...newArr })
+
+    // setQuantity([...quantity,...arr])
+    // let hasil = arr
+    // console.log(quantity, 'ini hasil')
+
+    // await AddCart(dispatch, [...cart, newArr]);
+
+    // console.log(cart.cart, 'ini carttt di db')
   };
+  // console.log(cart, "cart setelah click dashboard")
+
   useEffect(() => {
     getProduct();
   }, []);
@@ -69,13 +94,12 @@ export default function Jewelery() {
         letterSpacing={5}
         fontSize="28px"
       >
-        Jewelery's space
+        {category}
       </Heading>
-
       <Box m={[5, 10, 10]} fontSize="15px">
         <Wrap justify="center" align="center">
-          {jeweleryProduct
-            .filter(item => item.category === 'jewelery')
+          {products
+            .filter(item => item.category === `${category}`)
             .map((product, index) => (
               <Card key={index} w={[150, 200, 250]}>
                 <CardBody>
@@ -90,7 +114,7 @@ export default function Jewelery() {
                     overflow="hidden"
                     whiteSpace="nowrap"
                     w={[100, 200, 218]}
-                    p={['0px', '10px 20px', '10px 20px']}
+                    p={['0px', '10px 20px', '10px']}
                     fontSize="15px"
                   >
                     {product.title}
@@ -109,11 +133,16 @@ export default function Jewelery() {
                         state: { data: product },
                       })
                     }
+                    fontSize="15px"
                   >
                     Description
                   </Button>
                   <Spacer mt={[2, 0, 0]} />
-                  <Button onClick={() => handleCart(product)} size="sm">
+                  <Button
+                    onClick={() => handleCart(product)}
+                    fontSize="15px"
+                    size="sm"
+                  >
                     Add to Cart
                   </Button>
                 </CardFooter>
@@ -122,7 +151,7 @@ export default function Jewelery() {
         </Wrap>
       </Box>
       <Footer />
-      <DescriptionModal isOpen={isOpen} onClose={onClose} item={item} />
+      {/* <DescriptionModal isOpen={isOpen} onClose={onClose} item={item} /> */}
     </>
   );
 }
