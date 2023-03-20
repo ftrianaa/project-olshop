@@ -75,10 +75,10 @@ export default function DescriptionPage() {
     };
     AddCart(dispatch, [newArr]);
     if (user || user === undefined) {
-      navigate('/form-order');
+      navigate('/checkout');
       // console.log('masuk sini ga');
     } else {
-      onOpen();
+      navigate('/checkout-method');
     }
   };
   useEffect(() => {
@@ -200,11 +200,11 @@ export default function DescriptionPage() {
                 {item.title}
               </Text>
               <Text align="center">${item.price}</Text>
-              <Flex align="center" justify="center">
-                <FaStar />
-                {item.rating.rate} | <IoMdPerson /> {item.rating.count}{' '}
-              </Flex>
             </CardBody>
+            <Flex align="center" justify="center">
+              <FaStar />
+              {item.rating.rate} | <IoMdPerson /> {item.rating.count}{' '}
+            </Flex>
             <CardFooter>
               <Button onClick={() => handleCart(item)} w="100%" fontSize="15px">
                 Add to Cart

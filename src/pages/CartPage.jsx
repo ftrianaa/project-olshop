@@ -154,7 +154,7 @@ export default function CartPage() {
                           />
                         </ButtonGroup>
                       </Flex>
-                      <Text textAlign="right">
+                      <Text textAlign="right" fontWeight="bold">
                         $
                         {(
                           parseFloat(item.products.price) * cart[index].quantity
