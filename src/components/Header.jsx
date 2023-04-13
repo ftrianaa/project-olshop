@@ -140,8 +140,7 @@ export default function Header() {
             Home
           </Button>
           <Button bgColor="transparent" onClick={() => navigate('/cart')}>
-            {' '}
-            <BsCartFill /> &nbsp;{' '}
+            <BsCartFill /> &nbsp;
             <sup>{cart === '' || cart.length === 0 ? 0 : cart.length}</sup>
           </Button>
           <Button

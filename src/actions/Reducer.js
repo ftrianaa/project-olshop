@@ -3,14 +3,14 @@ let user = localStorage.getItem('user')
   : '';
 let cart = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
-  : '';
+  : [];
 let discount = localStorage.getItem('discount')
   ? JSON.parse(localStorage.getItem('discount'))
   : 0;
 export const initialState = {
   user: '' || user,
   isLogin: false,
-  cart: '' || cart,
+  cart: [] || cart,
   discount: 0 || discount,
 };
 

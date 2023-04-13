@@ -27,7 +27,7 @@ export default function SearchPage() {
   const dispatch = useCartDispatch();
   const navigate = useNavigate();
   const { cart } = useCartState();
-  const [quantity, setQuantity] = useState(1);
+  let quantity = 1;
   const [find, setFind] = useState([]);
   const getProduct = async () => {
     try {

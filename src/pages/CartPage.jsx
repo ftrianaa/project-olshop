@@ -105,7 +105,7 @@ export default function CartPage() {
           gap={5}
         >
           <GridItem colSpan={[1, 2, 2]} w="100%">
-            {cart ? (
+            {cart.length !== 0 ? (
               cart.map((item, index) => {
                 total += parseFloat(item.products.price) * cart[index].quantity;
                 return (
@@ -168,7 +168,11 @@ export default function CartPage() {
                 );
               })
             ) : (
-              <Heading>You don't have anything in cart</Heading>
+              <Flex align="center" justify="center">
+                <Heading textTransform="uppercase" fontSize="20px">
+                  You don't have anything in cart
+                </Heading>
+              </Flex>
             )}
           </GridItem>
           <GridItem colSpan={[1, 1, 1]}>

@@ -9,7 +9,7 @@ import {
   Image,
   Spacer,
   Text,
-  useDisclosure,
+  // useDisclosure,
   Wrap,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
@@ -18,7 +18,7 @@ import Header from '../components/Header';
 import Api from '../config/Config';
 import { FaStar } from 'react-icons/fa';
 import { IoMdPerson } from 'react-icons/io';
-import DescriptionModal from '../components/DescriptionModal';
+// import DescriptionModal from '../components/DescriptionModal';
 import { AddCart } from '../actions/Actions';
 import { useCartDispatch, useCartState } from '../actions/Context';
 import { useNavigate } from 'react-router-dom';
@@ -27,12 +27,11 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useCartDispatch();
   const [products, setProducts] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [item, setItem] = useState([]);
+  // const [item, setItem] = useState([]);
   const { cart } = useCartState();
-
+  let quantity = 1;
   // const [cart, setCart] = useState([])
-  const { onOpen, isOpen, onClose } = useDisclosure();
+  // const { onOpen, isOpen, onClose } = useDisclosure();
 
   const getProduct = async () => {
     try {
@@ -43,11 +42,11 @@ export default function Dashboard() {
     }
   };
 
-  const handleModalDesc = product => {
-    onOpen();
-    setItem(product);
-    // console.log(item, 'ini item db')
-  };
+  // const handleModalDesc = product => {
+  //   onOpen();
+  //   setItem(product);
+  // console.log(item, 'ini item db')
+  // };
   // console.log(cart, "cart di dashboard")
 
   const handleCart = async product => {
@@ -149,7 +148,7 @@ export default function Dashboard() {
         </Wrap>
       </Box>
       <Footer />
-      <DescriptionModal isOpen={isOpen} onClose={onClose} item={item} />
+      {/* <DescriptionModal isOpen={isOpen} onClose={onClose} item={item} /> */}
     </>
   );
 }

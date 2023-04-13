@@ -138,16 +138,19 @@ export default function DescriptionPage() {
           </GridItem>
           <GridItem textAlign="left" colSpan={[1, 1, 2]}>
             <Stack>
-              <Heading fontSize="28px">
-                {data.title} <Tag mt={3}>{data.category}</Tag>
-              </Heading>
+              <Flex align="center">
+                <Heading fontSize="20px">{data.title}</Heading>
+                <Tag ml={2} size="sm">
+                  {data.category}
+                </Tag>
+              </Flex>
               <Flex align="center" m={['10px 0px', 0, 0]}>
                 <FaStar />
                 <Text>
                   {data.rating.rate} (rating {data.rating.count})
                 </Text>
               </Flex>
-              <Heading m={['10px 0px', 0, 0]} fontSize="28px">
+              <Heading m={['10px 0px', 0, 0]} fontSize="20px">
                 ${data.price}
               </Heading>
               <ButtonGroup>
@@ -206,7 +209,12 @@ export default function DescriptionPage() {
               {item.rating.rate} | <IoMdPerson /> {item.rating.count}{' '}
             </Flex>
             <CardFooter>
-              <Button onClick={() => handleCart(item)} w="100%" fontSize="15px">
+              <Button
+                onClick={() => handleCart(item)}
+                w="100%"
+                fontSize="15px"
+                size="sm"
+              >
                 Add to Cart
               </Button>
             </CardFooter>
