@@ -21,6 +21,8 @@ import {
 import { FaSearch } from 'react-icons/fa';
 import { BsCartFill } from 'react-icons/bs';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { auth } from '../config/Firebase';
+import { signOut } from 'firebase/auth';
 
 // import { ColorModeSwitcher } from '../ColorModeSwitcher'
 export default function Header() {
@@ -33,11 +35,24 @@ export default function Header() {
   const [searchName, setSearchName] = useState('');
   // console.log(searchName, 'ini search name header')
   const handleLogout = () => {
-    LogoutUser(dispatch);
-    navigate('/login');
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        navigate('/login');
+      })
+      .catch(error => {
+        // An error happened.
+      });
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const userProfile = auth.currentUser;
+  let name = '';
+  if (userProfile !== null) {
+    userProfile.providerData.forEach(profile => {
+      name = profile.displayName;
+    });
+  }
+  console.log(name, 'ini name');
   return (
     // <Box >
     <Flex
@@ -139,6 +154,14 @@ export default function Header() {
           >
             Home
           </Button>
+          <Button
+            bgColor="transparent"
+            display={userProfile !== null ? 'block' : 'none'}
+            onClick={() => navigate('/setting')}
+            fontSize="15px"
+          >
+            Setting
+          </Button>
           <Button bgColor="transparent" onClick={() => navigate('/cart')}>
             <BsCartFill /> &nbsp;
             <sup>{cart === '' || cart.length === 0 ? 0 : cart.length}</sup>
@@ -148,7 +171,7 @@ export default function Header() {
             onClick={() => handleLogout()}
             fontSize="15px"
           >
-            {user === undefined || user ? 'LogOut' : 'LogIn'}
+            {userProfile !== null ? `Hi, ${name}` : 'LogIn'}
           </Button>
         </Box>
       </Flex>

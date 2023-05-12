@@ -1,27 +1,9 @@
 export const LoginUser = (dispatch, payloadLogin) => {
-  const userData = {
-    email: payloadLogin.email,
-    nama: 'fitri',
-  };
-  const userPass = {
-    password: payloadLogin.password,
-  };
-  if (userData.email === 'pulu@index.co' && userPass.password === '12345') {
-    // console.log(payloadLogin.email, "ini payload login")
-    dispatch({
-      type: 'SUCCESS_LOGIN',
-      user: userData,
-    });
-    localStorage.setItem('user', JSON.stringify(userData));
-    // console.log(userData, "ini payload login JUGA")
-
-    return userData;
-  } else {
-    dispatch({
-      type: 'FAILED_LOGIN',
-      payload: 'salah bang',
-    });
-  }
+  dispatch({
+    type: 'SUCCESS_LOGIN',
+    user: payloadLogin,
+  });
+  localStorage.setItem('user', JSON.stringify(payloadLogin));
 };
 //^ itu di atas semua action, isinya type dan payload
 export const LogoutUser = dispatch => {

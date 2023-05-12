@@ -47,7 +47,7 @@ export default function Dashboard() {
   //   setItem(product);
   // console.log(item, 'ini item db')
   // };
-  // console.log(cart, "cart di dashboard")
+  console.log(cart, 'cart di dashboard');
 
   const handleCart = async product => {
     // console.log("ini handle cart", cart.cart, product);

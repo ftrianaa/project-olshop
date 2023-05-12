@@ -9,6 +9,7 @@ import Login from '../pages/Login';
 import MethodCheckout from '../pages/MethodCheckout';
 import SearchPage from '../pages/SearchPage';
 import Signup from '../pages/Signup';
+import SettingPage from '../pages/SettingPage';
 
 export default function Routers() {
   return (
@@ -24,6 +25,8 @@ export default function Routers() {
       <Route path="/checkout-method" element={<MethodCheckout />} />
       <Route path="/checkout" element={<CheckoutPage />} />
       <Route path="/:category" element={<CategoryPage />} />
+
+      <Route path="/setting" element={<SettingPage />} />
     </Routes>
   );
 }
